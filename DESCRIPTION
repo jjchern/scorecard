@@ -1,0 +1,10 @@
+Package: scorecard
+Type: Package
+Title: College Scorecard Data, 1996-2013
+Version: 0.1
+Date: 2015-09-17
+Maintainer: JJ Chen <jiajia.chern@gmail.com>
+Description: College Scorecard raw data as an R data package.
+License: CC0
+LazyData: TRUE
+URL: https://github.com/jjchern/scorecard
