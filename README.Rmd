@@ -23,7 +23,8 @@ The data was last updated on January 13th, 2017 (as of August 5, 2017). See the 
 
 # Related R Package
 
-[Benjamin Skinner](https://github.com/btskinner) created a wonderful R client [`rscorecard`](http://btskinner.me/rscorecard/) for the [College Scorecard GET API](https://collegescorecard.ed.gov/data/documentation/).
+[Benjamin Skinner](https://github.com/btskinner) has created a wonderful R client [`rscorecard`](http://btskinner.me/rscorecard/) for the [College Scorecard GET API](https://collegescorecard.ed.gov/data/documentation/). If you're interested in 
+getting some specific variables quickly, I suggest using the `rscorecard` package.
 
 # Installation
 
@@ -36,4 +37,13 @@ devtools::install_github("jjchern/scorecard")
 
 # To uninstall the package, use:
 # remove.packages("scorecard")
+```
+
+# Examples
+
+## Loading the merged file for school year 2014-15
+
+```{r}
+library(tidyverse)
+scorecard::mf2014_15
 ```

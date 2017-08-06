@@ -103,11 +103,20 @@ csv_lst %>%
   paste0("mf", .) -> data_names
 data_names
 
+## Merged file years
+csv_lst %>%
+  str_extract("([0-9]{1,4}_[0-9]{1,2})") %>%
+  str_replace("_", "-") -> mf_year
+mf_year
+
 ## Load csv files, assign var labels, val labels, and dataset names
 csv_lst %>%
   map(~unz(zip, .)) %>%
   map(~read_csv(., guess_max = 10000, na = c("", "NA", "NULL"))) %>%
   map(~rename_all(., tolower)) %>%
+  ### Add mf_year as the first column
+  map2(.y = mf_year, ~mutate(., mf_year = .y)) %>%
+  map(~select(., mf_year, everything())) %>%
   ### Variables that has value labels should be numeric
   map(~mutate_at(., names(val_label_lst), as.numeric)) %>%
   map(~`var_label<-`(., var_label_lst)) %>%
@@ -140,5 +149,6 @@ unlink(zip)
 
 # Containerit! ------------------------------------------------------------
 
-container = dockerfile(from = sessionInfo())
+container = dockerfile(from = sessionInfo(),
+                       maintainer = "jjchern")
 write(container, "data-raw/prep_container.dockerfile")
