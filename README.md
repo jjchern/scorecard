@@ -1,5 +1,26 @@
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-About
-=====
 
-This R data package contains data from [College Scorecard](https://collegescorecard.ed.gov), 1996-2013.
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+About `scorecard`
+=================
+
+The `scorecard` repo contains an R script (in the [`data-raw` folder](https://github.com/jjchern/scorecard/tree/master/data-raw)) that downloads and process raw data from the [College Scorecard](https://collegescorecard.ed.gov), 1996-2014. The datasets are stored in the [`data` folder](https://github.com/jjchern/scorecard/tree/master/data).
+
+The data was last updated on January 13th, 2017 (as of August 5, 2017). See the [changelog](https://collegescorecard.ed.gov/data/changelog/) for more details.
+
+Related R Package
+=================
+
+[Benjamin Skinner](https://github.com/btskinner) created a wonderful R client [`rscorecard`](http://btskinner.me/rscorecard/) for the [College Scorecard GET API](https://collegescorecard.ed.gov/data/documentation/).
+
+Installation
+============
+
+You can also download the datasets as an R package. The size of the `data` folder is 138.1 MB, so it might take a while to install and load into memory.
+
+``` r
+# install.packages("devtools")
+devtools::install_github("jjchern/scorecard")
+
+# To uninstall the package, use:
+# remove.packages("scorecard")
+```
