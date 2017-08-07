@@ -18,9 +18,38 @@ knitr::opts_chunk$set(
 
 # About `scorecard`
 
-The `scorecard` repo contains an R script (in the [`data-raw` folder](https://github.com/jjchern/scorecard/tree/master/data-raw)) that downloads and process raw data from the [College Scorecard](https://collegescorecard.ed.gov), 1996-2014. The datasets are stored in the [`data` folder](https://github.com/jjchern/scorecard/tree/master/data).
+The `scorecard` repo contains an R script `prep.R` (in the [`data-raw` folder](https://github.com/jjchern/scorecard/tree/master/data-raw)) that downloads and process raw data from the [College Scorecard](https://collegescorecard.ed.gov), 1996-2014. The datasets are stored in the [`data` folder](https://github.com/jjchern/scorecard/tree/master/data).
 
 The data was last updated on January 13th, 2017 (as of August 5, 2017). See the [changelog](https://collegescorecard.ed.gov/data/changelog/) for more details.
+
+The following datasets are available:
+
+- `scorecard::mf1996_97`
+- `scorecard::mf1997_98`
+- `scorecard::mf1998_99`
+- `scorecard::mf1999_00`
+- `scorecard::mf2000_01`
+- `scorecard::mf2001_02`
+- `scorecard::mf2002_03`
+- `scorecard::mf2003_04`
+- `scorecard::mf2004_05`
+- `scorecard::mf2005_06`
+- `scorecard::mf2006_07`
+- `scorecard::mf2007_08`
+- `scorecard::mf2008_09`
+- `scorecard::mf2009_10`
+- `scorecard::mf2010_11`
+- `scorecard::mf2011_12`
+- `scorecard::mf2012_13`
+- `scorecard::mf2013_14`
+- `scorecard::mf2014_15`
+- `scorecard::codebook`
+- `scorecard::cohort_map`
+
+The following functions are implemented:
+
+- `scorecard::attach_var_label()`: Assign variable labels.
+- `scorecard::attach_val_label()`: Assign value labels for certain variables
 
 # Related R Package
 
@@ -44,14 +73,67 @@ devtools::install_github("jjchern/scorecard")
 
 ## Loading the merged file for school year 2014-15
 
+All datasets are tibbles:
+
 ```{r}
 library(tidyverse)
 scorecard::mf2014_15
 ```
 
-## Exploring codebook and plot in-state tuition with a joyplot
+## Working with variable and value labels
+
+All the datasets have variable labels attached, which can be viewed in RStudio's Data Viewer:
+
+```R
+View(scorecard::mf2014_15)
+```
+
+![](README-files/RStudio-Data-Viewer.png)
+
+You can also use the `labelled` package:
 
 ```{r}
+scorecard::mf2014_15 %>% 
+  select(1:8) %>% 
+  labelled::var_label()
+```
+
+Or work with the codebook directly:
+
+```{r}
+## Show variable labels
+scorecard::codebook %>% 
+  select(var_name, var_label)
+
+## Build a small function to shown value labels
+show_val_label = . %>% {
+    filter(scorecard::codebook, var_name == .) %>% 
+    mutate(val_label = glue::glue("{val_label}  = {value}")) %>% 
+    distinct(val_label)}
+
+## Show value labels:
+show_val_label("curroper")
+show_val_label("distanceonly")
+```
+
+In binding multiple years of data with `dyplr::bind_rows()`, however, labels will get dropped. To throw back the labels, `scorecard` also provides to simple functions that attach variable and value labels to the tibbles:
+
+```{r}
+bind_rows(
+  scorecard::mf2014_15 %>% select(mf_year, instnm, control, adm_rate),
+  scorecard::mf2013_14 %>% select(mf_year, instnm, control, adm_rate)
+) %>% 
+  scorecard::attach_var_label() %>% 
+  scorecard::attach_val_label() -> df
+
+df
+labelled::var_label(df)
+labelled::val_labels(df)
+```
+
+## Exploring codebook and plot in-state tuition with a joyplot
+
+```{r in_tuition}
 vars = c("mf_year", "iclevel", "control", "tuitionfee_in")
 
 scorecard::codebook %>% 
@@ -106,7 +188,7 @@ df %>%
 
 ## Compare in-state and out-of-state tuition and fees
 
-```{r}
+```{r in_or_out_tuition}
 vars = c("mf_year", "iclevel", "control", "tuitionfee_in", "tuitionfee_out")
 
 dplyr_seq = . %>% 
@@ -162,9 +244,3 @@ df %>%
         legend.title = element_blank(),
         legend.justification = "center")
 ```
-
-
-```{r}
-# Completion related variables: c150_4, d150_4, c150_l4, d150_l4, c150_4_pooled, c150_l4_pooled, poolyrs
-```
-
