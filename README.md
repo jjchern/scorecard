@@ -3,6 +3,8 @@
 About `scorecard`
 =================
 
+[![Travis-CI Build Status](https://travis-ci.org/jjchern/scorecard.svg?branch=master)](https://travis-ci.org/jjchern/scorecard) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/jjchern/scorecard?branch=master&svg=true)](https://ci.appveyor.com/project/jjchern/scorecard)
+
 The `scorecard` repo contains an R script `prep.R` (in the [`data-raw` folder](https://github.com/jjchern/scorecard/tree/master/data-raw)) that downloads and process raw data from the [College Scorecard](https://collegescorecard.ed.gov), 1996-2014. The datasets are stored in the [`data` folder](https://github.com/jjchern/scorecard/tree/master/data).
 
 The data was last updated on January 13th, 2017 (as of August 5, 2017). See the [changelog](https://collegescorecard.ed.gov/data/changelog/) for more details.
