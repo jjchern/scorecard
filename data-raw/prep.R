@@ -36,7 +36,7 @@ cohort_map
 
 use_data(codebook, cohort_map, overwrite = TRUE)
 
-# Prepare variable label --------------------------------------------------
+# Prepare variable label and value labels ---------------------------------
 
 codebook %>%
   select(var_name, var_label) %>%
@@ -44,10 +44,6 @@ codebook %>%
   deframe() %>%
   as.list() -> var_label_lst
 var_label_lst
-
-use_data(var_label_lst, overwrite = TRUE, internal = TRUE)
-
-# Prepare value labels ----------------------------------------------------
 
 codebook %>%
   select(var_name, val_label, value) %>%
@@ -58,7 +54,7 @@ codebook %>%
   deframe() -> val_label_lst
 val_label_lst
 
-use_data(val_label_lst, overwrite = TRUE, internal = TRUE)
+use_data(var_label_lst, val_label_lst, overwrite = TRUE, internal = TRUE)
 
 # Download the raw data ---------------------------------------------------
 

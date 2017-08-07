@@ -12,3 +12,4 @@ LazyData: true
 URL: https://github.com/jjchern/scorecard
 BugReports: https://github.com/jjchern/scorecard/issues
 RoxygenNote: 6.0.1
+Imports: labelled
