@@ -150,5 +150,6 @@ unlink(zip)
 # Containerit! ------------------------------------------------------------
 
 container = dockerfile(from = sessionInfo(),
-                       maintainer = "jjchern")
+                       maintainer = "jjchern",
+                       r_version = "3.4.0")
 write(container, "data-raw/prep_container.dockerfile")

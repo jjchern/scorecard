@@ -11,7 +11,8 @@ knitr::opts_chunk$set(
   fig.path = "README-files/",
   cache = TRUE,
   message = FALSE,
-  warning = FALSE
+  warning = FALSE,
+  fig.height = 10
 )
 ```
 
@@ -47,3 +48,118 @@ devtools::install_github("jjchern/scorecard")
 library(tidyverse)
 scorecard::mf2014_15
 ```
+
+## Exploring codebook and plot in-state tuition with a joyplot
+
+```{r}
+vars = c("mf_year", "iclevel", "control", "tuitionfee_in")
+
+scorecard::codebook %>% 
+  select(var_name, var_label, value, val_label) %>% 
+  filter(var_name %in% vars) %>% 
+  knitr::kable()
+
+dplyr_seq = . %>% 
+  select(one_of(vars)) %>%
+  haven::as_factor() %>% 
+  filter(iclevel %in% c("4-year", "2-year")) %>% 
+  mutate(year = mf_year %>% parse_number() %>% as.factor()) %>% 
+  group_by(iclevel, control) %>% 
+  mutate_at(c("tuitionfee_in"),
+            ~statar::winsorise(., probs = c(0.02, 0.98), verbose = FALSE)) %>% 
+  ungroup()
+
+## Test the functional sequence
+scorecard::mf2014_15 %>% dplyr_seq()
+
+bind_rows(
+  scorecard::mf2014_15 %>% dplyr_seq(),
+  scorecard::mf2013_14 %>% dplyr_seq(),
+  scorecard::mf2012_13 %>% dplyr_seq(),
+  scorecard::mf2011_12 %>% dplyr_seq(),
+  scorecard::mf2010_11 %>% dplyr_seq(),
+  scorecard::mf2009_10 %>% dplyr_seq(),
+  scorecard::mf2008_09 %>% dplyr_seq(),
+  scorecard::mf2007_08 %>% dplyr_seq(),
+  scorecard::mf2006_07 %>% dplyr_seq(),
+  scorecard::mf2005_06 %>% dplyr_seq(),
+  scorecard::mf2004_05 %>% dplyr_seq(),
+  scorecard::mf2003_04 %>% dplyr_seq(),
+  scorecard::mf2002_03 %>% dplyr_seq(),
+  scorecard::mf2001_02 %>% dplyr_seq(),
+  scorecard::mf2000_01 %>% dplyr_seq()
+) -> df
+
+df %>% 
+  ggplot(aes(x = tuitionfee_in, y = year, fill = iclevel)) +
+  ggjoy::geom_joy(scale = 2, alpha = .8, colour = "white") +
+  ggjoy::theme_joy() +
+  facet_grid(iclevel~control, scales = "free") +
+  labs(x = NULL, y = NULL,
+       title = "In-State Tuition and Fees, 2000-2014") +
+  scale_x_continuous(labels = scales::dollar) +
+  scale_y_discrete(breaks = seq(2014, 2000, -3), 
+                   expand = c(0.01, 0)) +
+  theme(axis.text = element_text(size = 8),
+        legend.position = "none")
+```
+
+## Compare in-state and out-of-state tuition and fees
+
+```{r}
+vars = c("mf_year", "iclevel", "control", "tuitionfee_in", "tuitionfee_out")
+
+dplyr_seq = . %>% 
+  select(one_of(vars)) %>%
+  haven::as_factor() %>% 
+  filter(iclevel %in% c("4-year", "2-year")) %>% 
+  filter(control == "Public") %>% 
+  mutate(type = paste(control, iclevel)) %>% 
+  mutate(year = mf_year %>% parse_number() %>% as.factor()) %>% 
+  group_by(type) %>% 
+  mutate_at(c("tuitionfee_in", "tuitionfee_out"),
+            ~statar::winsorise(., probs = c(0.02, 0.98), verbose = FALSE)) %>% 
+  ungroup() %>% 
+  gather(in_or_out, tuitionfee, tuitionfee_in:tuitionfee_out) %>% 
+  mutate(in_or_out = if_else(in_or_out == "tuitionfee_in",
+                              "In-state tuition and fees",
+                              "Out-of-state tuition and fees"))
+
+## Test the functional sequence
+scorecard::mf2014_15 %>% dplyr_seq()
+
+bind_rows(
+  scorecard::mf2014_15 %>% dplyr_seq(),
+  scorecard::mf2013_14 %>% dplyr_seq(),
+  scorecard::mf2012_13 %>% dplyr_seq(),
+  scorecard::mf2011_12 %>% dplyr_seq(),
+  scorecard::mf2010_11 %>% dplyr_seq(),
+  scorecard::mf2009_10 %>% dplyr_seq(),
+  scorecard::mf2008_09 %>% dplyr_seq(),
+  scorecard::mf2007_08 %>% dplyr_seq(),
+  scorecard::mf2006_07 %>% dplyr_seq(),
+  scorecard::mf2005_06 %>% dplyr_seq(),
+  scorecard::mf2004_05 %>% dplyr_seq(),
+  scorecard::mf2003_04 %>% dplyr_seq(),
+  scorecard::mf2002_03 %>% dplyr_seq(),
+  scorecard::mf2001_02 %>% dplyr_seq(),
+  scorecard::mf2000_01 %>% dplyr_seq()
+) -> df
+
+df %>% 
+  ggplot(aes(x = tuitionfee, y = year, fill = in_or_out)) +
+  ggjoy::geom_joy(scale = 2, alpha = .8, colour = "white") +
+  ggjoy::theme_joy() +
+  facet_wrap(~type, scales = "free") +
+  labs(x = NULL, y = NULL,
+       title = "In-State Vs. Out-of-State Tuition and Fees for Public Colleges",
+       caption = "Source: College Scorecard, 2000-2014") +
+  scale_x_continuous(labels = scales::dollar) +
+  scale_y_discrete(breaks = seq(2014, 2000, -3), 
+                   expand = c(0.01, 0)) +
+  theme(axis.text = element_text(size = 9),
+        legend.position = "top",
+        legend.title = element_blank(),
+        legend.justification = "center")
+```
+
