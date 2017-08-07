@@ -163,3 +163,8 @@ df %>%
         legend.justification = "center")
 ```
 
+
+```{r}
+# Completion related variables: c150_4, d150_4, c150_l4, d150_l4, c150_4_pooled, c150_l4_pooled, poolyrs
+```
+

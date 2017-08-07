@@ -45,6 +45,8 @@ codebook %>%
   as.list() -> var_label_lst
 var_label_lst
 
+use_data(var_label_lst, overwrite = TRUE, internal = TRUE)
+
 # Prepare value labels ----------------------------------------------------
 
 codebook %>%
@@ -55,6 +57,8 @@ codebook %>%
   mutate(data = map(data, deframe)) %>%
   deframe() -> val_label_lst
 val_label_lst
+
+use_data(val_label_lst, overwrite = TRUE, internal = TRUE)
 
 # Download the raw data ---------------------------------------------------
 
@@ -117,6 +121,8 @@ csv_lst %>%
   ### Add mf_year as the first column
   map2(.y = mf_year, ~mutate(., mf_year = .y)) %>%
   map(~select(., mf_year, everything())) %>%
+  ### Identifiers should always be string
+  map(~mutate_at(., c("unitid", "opeid", "opeid6"), as.character)) %>%
   ### Variables that has value labels should be numeric
   map(~mutate_at(., names(val_label_lst), as.numeric)) %>%
   map(~`var_label<-`(., var_label_lst)) %>%
@@ -144,10 +150,9 @@ use_data(mf2013_14, overwrite = TRUE)
 use_data(mf2014_15, overwrite = TRUE)
 
 # Delete the raw zip file -------------------------------------------------
+# unlink(zip)
 
-unlink(zip)
-
-# Containerit! ------------------------------------------------------------
+# Container it ------------------------------------------------------------
 
 container = dockerfile(from = sessionInfo(),
                        maintainer = "jjchern",
