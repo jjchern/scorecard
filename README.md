@@ -46,11 +46,11 @@ Related R Package
 Installation
 ============
 
-You can also download the datasets as an R package. The size of the `data` folder is 138.1 MB, so it might take a while to install and load into memory.
+You can also download the datasets as an R package. The size of the `data` folder is 138.1 MB, so it might take a while to install and load into memory. To download the most recent stable release, use
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("jjchern/scorecard")
+devtools::install_github("jjchern/scorecard@v0.2.1")
 
 # To uninstall the package, use:
 # remove.packages("scorecard")
