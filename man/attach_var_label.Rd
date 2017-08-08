@@ -6,9 +6,17 @@
 \usage{
 attach_var_label(df)
 }
+\arguments{
+\item{df}{An extracted data frame from the scorecard merged files}
+}
 \value{
-A tibble, with proper variable labels
+A data frame, with proper variable labels
 }
 \description{
 Attach variable labels
+}
+\examples{
+\dontrun{
+attach_var_label(scorecard::mf2014_15)
+}
 }

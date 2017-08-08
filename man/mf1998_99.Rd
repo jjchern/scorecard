@@ -4,7 +4,7 @@
 \name{mf1998_99}
 \alias{mf1998_99}
 \title{College Scorecard Data, 1998-99}
-\format{An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 6480 rows and 1744 columns.}
+\format{An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 6480 rows and 566 columns.}
 \source{
 \url{https://collegescorecard.ed.gov/data}
 }
