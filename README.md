@@ -7,7 +7,7 @@ About `scorecard`
 
 The `scorecard` repo contains an R script `prep.R` (in the [`data-raw` folder](https://github.com/jjchern/scorecard/tree/master/data-raw)) that downloads and process raw data from the [College Scorecard](https://collegescorecard.ed.gov), 1996-2014. The datasets are stored in the [`data` folder](https://github.com/jjchern/scorecard/tree/master/data).
 
-The data was last updated on January 13th, 2017 (as of August 5, 2017). See the [changelog](https://collegescorecard.ed.gov/data/changelog/) for more details.
+The scorecard dataset is an imbalance panel at the colleges-by-school-year level. The data was last updated on January 13th, 2017 (as of August 5, 2017). See the [changelog](https://collegescorecard.ed.gov/data/changelog/) for more details.
 
 The following datasets are available:
 
@@ -329,8 +329,8 @@ df %>%
 
 ![](README-files/in_tuition-1.png)
 
-Compare in-state and out-of-state tuition and fees
---------------------------------------------------
+Compareing in-state and out-of-state tuition and fees
+-----------------------------------------------------
 
 ``` r
 vars = c("mf_year", "iclevel", "control", "tuitionfee_in", "tuitionfee_out")
