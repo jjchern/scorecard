@@ -123,6 +123,9 @@ csv_lst %>%
   map(~mutate_at(., names(val_label_lst), as.numeric)) %>%
   map(~`var_label<-`(., var_label_lst)) %>%
   map(~`val_labels<-`(., val_label_lst)) %>%
+  ### Drop columns that all values are NA
+  map(~discard(., ~all(is.na(.x)))) %>%
+  ### Assign dataset names
   map2(.y = data_names, ~assign(.y, .x, envir = .GlobalEnv))
 
 use_data(mf1996_97, overwrite = TRUE)
