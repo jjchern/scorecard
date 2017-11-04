@@ -21,9 +21,9 @@ knitr::opts_chunk$set(
 [![Travis-CI Build Status](https://travis-ci.org/jjchern/scorecard.svg?branch=master)](https://travis-ci.org/jjchern/scorecard)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/jjchern/scorecard?branch=master&svg=true)](https://ci.appveyor.com/project/jjchern/scorecard)
 
-The `scorecard` repo contains an R script `prep.R` (in the [`data-raw` folder](https://github.com/jjchern/scorecard/tree/master/data-raw)) that downloads and process raw data from the [College Scorecard](https://collegescorecard.ed.gov), 1996-2014. The datasets are stored in the [`data` folder](https://github.com/jjchern/scorecard/tree/master/data).
+The `scorecard` package includes processed datasets from the [College Scorecard](https://collegescorecard.ed.gov), 1996-2015.
 
-The scorecard dataset is an imbalance panel at the colleges-by-school-year level. The data was last updated on January 13th, 2017 (as of August 5, 2017). See the [changelog](https://collegescorecard.ed.gov/data/changelog/) for more details.
+The Scorecard datasets are imbalance panels at the colleges-by-school-year level. The data was last updated in 2017. See the [changelog](https://collegescorecard.ed.gov/data/changelog/) for more details.
 
 The following datasets are available:
 
@@ -46,6 +46,7 @@ The following datasets are available:
 - `scorecard::mf2012_13`
 - `scorecard::mf2013_14`
 - `scorecard::mf2014_15`
+- `scorecard::mf2015_16`
 - `scorecard::codebook`
 - `scorecard::cohort_map`
 
@@ -61,12 +62,11 @@ getting some specific variables quickly, I suggest using the `rscorecard` packag
 
 # Installation
 
-You can also download the datasets as an R package.
-The size of the `data` folder is 138.1 MB, so it might take a while to install and load into memory. To download the most recent stable release, use
+You can also download the datasets as an R package. It might take a while to install and load into memory. To download the most recent stable release, use
 
 ```R
 # install.packages("devtools")
-devtools::install_github("jjchern/scorecard@v0.2.1")
+devtools::install_github("jjchern/scorecard@v0.3.0")
 
 # To uninstall the package, use:
 # remove.packages("scorecard")
