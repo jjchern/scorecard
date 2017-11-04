@@ -7,9 +7,10 @@ library(labelled)
 library(containerit)
 
 # Save the codebook and cohort_map files ----------------------------------
+# Include data from the most recent update (September 28th, 2017)
 
 url = "https://collegescorecard.ed.gov/assets/CollegeScorecardDataDictionary.xlsx"
-fil = "data-raw/CollegeScorecardDataDictionary.xlsx"
+fil = "data-raw/CollegeScorecardDataDictionary_092017.xlsx"
 if (!file.exists(fil)) download.file(url, fil)
 
 read_excel(fil, sheet = 4) %>%
@@ -57,9 +58,10 @@ val_label_lst
 use_data(var_label_lst, val_label_lst, overwrite = TRUE, internal = TRUE)
 
 # Download the raw data ---------------------------------------------------
+# Include data from the most recent update (September 28th, 2017)
 
 url = "https://ed-public-download.app.cloud.gov/downloads/CollegeScorecard_Raw_Data.zip"
-zip = "data-raw/CollegeScorecard_Raw_Data.zip"
+zip = "data-raw/CollegeScorecard_Raw_Data_092017.zip"
 if (!file.exists(zip)) download.file(url, zip)
 
 # List files in the zip file ----------------------------------------------
@@ -67,27 +69,28 @@ if (!file.exists(zip)) download.file(url, zip)
 unzip(zip, list = TRUE)
 
 # Name    Length                Date
-# 1                         CollegeScorecard_Raw_Data/         0 2016-12-27 08:47:00
-# 2  CollegeScorecard_Raw_Data/Crosswalks_20160908.zip  38045951 2016-09-08 21:42:00
-# 3     CollegeScorecard_Raw_Data/MERGED1996_97_PP.csv  55220605 2016-12-15 12:57:00
-# 4     CollegeScorecard_Raw_Data/MERGED1997_98_PP.csv  59053924 2016-12-15 12:58:00
-# 5     CollegeScorecard_Raw_Data/MERGED1998_99_PP.csv  70229449 2016-12-15 12:58:00
-# 6     CollegeScorecard_Raw_Data/MERGED1999_00_PP.csv  84703482 2016-12-15 12:59:00
-# 7     CollegeScorecard_Raw_Data/MERGED2000_01_PP.csv  97532245 2016-12-15 13:00:00
-# 8     CollegeScorecard_Raw_Data/MERGED2001_02_PP.csv 100337087 2016-12-15 13:00:00
-# 9     CollegeScorecard_Raw_Data/MERGED2002_03_PP.csv 111782914 2016-12-15 13:01:00
-# 10    CollegeScorecard_Raw_Data/MERGED2003_04_PP.csv 113813363 2016-12-15 13:02:00
-# 11    CollegeScorecard_Raw_Data/MERGED2004_05_PP.csv 126760179 2016-12-15 13:02:00
-# 12    CollegeScorecard_Raw_Data/MERGED2005_06_PP.csv 130989222 2016-12-15 13:03:00
-# 13    CollegeScorecard_Raw_Data/MERGED2006_07_PP.csv 129601157 2016-12-15 13:04:00
-# 14    CollegeScorecard_Raw_Data/MERGED2007_08_PP.csv 132381344 2016-12-15 13:05:00
-# 15    CollegeScorecard_Raw_Data/MERGED2008_09_PP.csv 132326367 2016-12-15 13:05:00
-# 16    CollegeScorecard_Raw_Data/MERGED2009_10_PP.csv 137860968 2016-12-15 13:06:00
-# 17    CollegeScorecard_Raw_Data/MERGED2010_11_PP.csv 140820124 2016-12-15 13:07:00
-# 18    CollegeScorecard_Raw_Data/MERGED2011_12_PP.csv 147544872 2016-12-15 13:08:00
-# 19    CollegeScorecard_Raw_Data/MERGED2012_13_PP.csv 149502255 2016-12-15 13:09:00
-# 20    CollegeScorecard_Raw_Data/MERGED2013_14_PP.csv 148301400 2016-12-15 13:10:00
-# 21    CollegeScorecard_Raw_Data/MERGED2014_15_PP.csv  70331131 2016-12-15 12:51:00
+# 1                         CollegeScorecard_Raw_Data/         0 2017-10-02 14:55:00
+# 2  CollegeScorecard_Raw_Data/Crosswalks_20170806.zip  40757406 2017-09-05 11:32:00
+# 3     CollegeScorecard_Raw_Data/MERGED1996_97_PP.csv  56322100 2017-09-30 09:44:00
+# 4     CollegeScorecard_Raw_Data/MERGED1997_98_PP.csv  59834161 2017-09-30 09:44:00
+# 5     CollegeScorecard_Raw_Data/MERGED1998_99_PP.csv  70813341 2017-09-30 09:45:00
+# 6     CollegeScorecard_Raw_Data/MERGED1999_00_PP.csv  85101637 2017-09-30 09:45:00
+# 7     CollegeScorecard_Raw_Data/MERGED2000_01_PP.csv  97737425 2017-09-30 09:46:00
+# 8     CollegeScorecard_Raw_Data/MERGED2001_02_PP.csv 100518881 2017-09-30 09:46:00
+# 9     CollegeScorecard_Raw_Data/MERGED2002_03_PP.csv 111745844 2017-09-30 09:47:00
+# 10    CollegeScorecard_Raw_Data/MERGED2003_04_PP.csv 113713786 2017-09-30 09:48:00
+# 11    CollegeScorecard_Raw_Data/MERGED2004_05_PP.csv 126436249 2017-09-30 09:48:00
+# 12    CollegeScorecard_Raw_Data/MERGED2005_06_PP.csv 130602598 2017-09-30 09:49:00
+# 13    CollegeScorecard_Raw_Data/MERGED2006_07_PP.csv 129281225 2017-09-30 09:50:00
+# 14    CollegeScorecard_Raw_Data/MERGED2007_08_PP.csv 131979415 2017-09-30 09:50:00
+# 15    CollegeScorecard_Raw_Data/MERGED2008_09_PP.csv 131845770 2017-09-30 09:51:00
+# 16    CollegeScorecard_Raw_Data/MERGED2009_10_PP.csv 137341725 2017-09-30 09:52:00
+# 17    CollegeScorecard_Raw_Data/MERGED2010_11_PP.csv 140178337 2017-09-30 09:52:00
+# 18    CollegeScorecard_Raw_Data/MERGED2011_12_PP.csv 146759159 2017-09-30 09:53:00
+# 19    CollegeScorecard_Raw_Data/MERGED2012_13_PP.csv 148646097 2017-09-30 09:54:00
+# 20    CollegeScorecard_Raw_Data/MERGED2013_14_PP.csv 149314595 2017-09-30 09:55:00
+# 21    CollegeScorecard_Raw_Data/MERGED2014_15_PP.csv 145894837 2017-09-30 09:55:00
+# 22    CollegeScorecard_Raw_Data/MERGED2015_16_PP.csv  70217503 2017-09-30 09:39:00
 
 # Save main datasets -------------------------------------------------------
 
@@ -147,6 +150,7 @@ use_data(mf2011_12, overwrite = TRUE)
 use_data(mf2012_13, overwrite = TRUE)
 use_data(mf2013_14, overwrite = TRUE)
 use_data(mf2014_15, overwrite = TRUE)
+use_data(mf2015_16, overwrite = TRUE)
 
 # Delete the raw zip file -------------------------------------------------
 # unlink(zip)
@@ -155,5 +159,5 @@ use_data(mf2014_15, overwrite = TRUE)
 
 container = dockerfile(from = sessionInfo(),
                        maintainer = "jjchern",
-                       r_version = "3.4.0")
+                       r_version = "3.4.2")
 write(container, "data-raw/prep_container.dockerfile")

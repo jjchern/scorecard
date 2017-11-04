@@ -150,6 +150,14 @@
 #' @source [https://collegescorecard.ed.gov/data]()
 "mf2014_15"
 
+#' College Scorecard Data, 2015-16
+#'
+#' Contains all the variables from College Scorecard Merged Files.
+#'
+#' @md
+#' @source [https://collegescorecard.ed.gov/data]()
+"mf2015_16"
+
 #' College Scorecard Data codebook
 #'
 #' Contains variable names, labels, label values for the College Scorecard Data.

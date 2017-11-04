@@ -4,7 +4,7 @@
 \name{codebook}
 \alias{codebook}
 \title{College Scorecard Data codebook}
-\format{An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 1975 rows and 9 columns.}
+\format{An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 2011 rows and 9 columns.}
 \source{
 \url{https://collegescorecard.ed.gov/data}
 }
