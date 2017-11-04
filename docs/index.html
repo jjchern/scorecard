@@ -31,7 +31,7 @@
 <li>
   <a href="/index.html">
     <span class="fa fa-home fa-lg"></span>
-     
+
   </a>
 </li>
 <li>
@@ -45,7 +45,7 @@
 <li>
   <a href="https://github.com/jjchern/scorecard">
     <span class="fa fa-github fa-lg"></span>
-     
+
   </a>
 </li>
       </ul>
@@ -56,13 +56,13 @@
 </div>
 <!--/.navbar -->
 
-      
+
       </header><div class="row">
   <div class="col-md-9">
-    
 
-    
-    
+
+
+
 <div class="contents">
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <div id="about-scorecard" class="section level1">
@@ -70,8 +70,8 @@
 <a href="#about-scorecard" class="anchor"></a>About <code>scorecard</code>
 </h1></div>
 
-<p>The <code>scorecard</code> repo contains an R script <code>prep.R</code> (in the <a href="https://github.com/jjchern/scorecard/tree/master/data-raw"><code>data-raw</code> folder</a>) that downloads and process raw data from the <a href="https://collegescorecard.ed.gov">College Scorecard</a>, 1996-2014. The datasets are stored in the <a href="https://github.com/jjchern/scorecard/tree/master/data"><code>data</code> folder</a>.</p>
-<p>The scorecard dataset is an imbalance panel at the colleges-by-school-year level. The data was last updated on January 13th, 2017 (as of August 5, 2017). See the <a href="https://collegescorecard.ed.gov/data/changelog/">changelog</a> for more details.</p>
+<p>The <code>scorecard</code> package includes processed datasets from the <a href="https://collegescorecard.ed.gov">College Scorecard</a>, 1996-2015.</p>
+<p>The Scorecard datasets are imbalance panels at the colleges-by-school-year level. The data was last updated in 2017. See the <a href="https://collegescorecard.ed.gov/data/changelog/">changelog</a> for more details.</p>
 <p>The following datasets are available:</p>
 <ul>
 <li><code><a href="http://www.rdocumentation.org/packages/scorecard/topics/mf1996_97">scorecard::mf1996_97</a></code></li>
@@ -93,6 +93,7 @@
 <li><code><a href="http://www.rdocumentation.org/packages/scorecard/topics/mf2012_13">scorecard::mf2012_13</a></code></li>
 <li><code><a href="http://www.rdocumentation.org/packages/scorecard/topics/mf2013_14">scorecard::mf2013_14</a></code></li>
 <li><code><a href="http://www.rdocumentation.org/packages/scorecard/topics/mf2014_15">scorecard::mf2014_15</a></code></li>
+<li><code><a href="http://www.rdocumentation.org/packages/scorecard/topics/mf2015_16">scorecard::mf2015_16</a></code></li>
 <li><code><a href="http://www.rdocumentation.org/packages/scorecard/topics/codebook">scorecard::codebook</a></code></li>
 <li><code><a href="http://www.rdocumentation.org/packages/scorecard/topics/cohort_map">scorecard::cohort_map</a></code></li>
 </ul>
@@ -112,9 +113,9 @@
 <div id="installation" class="section level1">
 <h1 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h1>
-<p>You can also download the datasets as an R package. The size of the <code>data</code> folder is 138.1 MB, so it might take a while to install and load into memory. To download the most recent stable release, use</p>
+<p>You can also download the datasets as an R package. It might take a while to install and load into memory. To download the most recent stable release, use</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("devtools")</span>
-devtools::<span class="kw">install_github</span>(<span class="st">"jjchern/scorecard@v0.2.1"</span>)
+devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"jjchern/scorecard@v0.3.0"</span>)
 
 <span class="co"># To uninstall the package, use:</span>
 <span class="co"># remove.packages("scorecard")</span></code></pre></div>
@@ -127,7 +128,7 @@ devtools::<span class="kw">install_github</span>(<span class="st">"jjchern/score
 <a href="#loading-the-merged-file-for-school-year-2014-15" class="anchor"></a>Loading the merged file for school year 2014-15</h2>
 <p>All datasets are tibbles:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
-scorecard::mf2014_15
+scorecard<span class="op">::</span>mf2014_<span class="dv">15</span>
 <span class="co">#&gt; # A tibble: 7,703 x 1,744</span>
 <span class="co">#&gt;    mf_year unitid    opeid opeid6                              instnm</span>
 <span class="co">#&gt;      &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;                               &lt;chr&gt;</span>
@@ -172,14 +173,14 @@ scorecard::mf2014_15
 <h2 class="hasAnchor">
 <a href="#working-with-variable-and-value-labels" class="anchor"></a>Working with variable and value labels</h2>
 <p>All the datasets have variable labels attached, which can be viewed in RStudio’s Data Viewer:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">View</span>(scorecard::mf2014_15)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">View</span>(scorecard<span class="op">::</span>mf2014_<span class="dv">15</span>)</code></pre></div>
 <div class="figure">
 <img src="README-files/RStudio-Data-Viewer.png">
 </div>
 <p>You can also use the <code>labelled</code> package:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scorecard::mf2014_15 %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">select</span>(<span class="dv">1</span>:<span class="dv">8</span>) %&gt;%<span class="st"> </span>
-<span class="st">  </span>labelled::<span class="kw">var_label</span>()
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scorecard<span class="op">::</span>mf2014_<span class="dv">15</span> <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>labelled<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/labelled/topics/var_label">var_label</a></span>()
 <span class="co">#&gt; $mf_year</span>
 <span class="co">#&gt; NULL</span>
 <span class="co">#&gt; </span>
@@ -205,7 +206,7 @@ scorecard::mf2014_15
 <span class="co">#&gt; [1] "ZIP code"</span></code></pre></div>
 <p>Or work with the codebook directly:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Show variable labels
-scorecard::codebook %&gt;%<span class="st"> </span>
+scorecard<span class="op">::</span>codebook <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(var_name, var_label)
 <span class="co">#&gt; # A tibble: 1,975 x 2</span>
 <span class="co">#&gt;        var_name                                  var_label</span>
@@ -223,9 +224,9 @@ scorecard::codebook %&gt;%<span class="st"> </span>
 <span class="co">#&gt; # ... with 1,965 more rows</span>
 
 ## Build a small function to shown value labels
-show_val_label =<span class="st"> </span>. %&gt;%<span class="st"> </span>{
-    <span class="kw">filter</span>(scorecard::codebook, var_name ==<span class="st"> </span>.) %&gt;%<span class="st"> </span>
-<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">val_label =</span> glue::<span class="kw">glue</span>(<span class="st">"{val_label}  = {value}"</span>)) %&gt;%<span class="st"> </span>
+show_val_label =<span class="st"> </span>. <span class="op">%&gt;%</span><span class="st"> </span>{
+    <span class="kw">filter</span>(scorecard<span class="op">::</span>codebook, var_name <span class="op">==</span><span class="st"> </span>.) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">val_label =</span> glue<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/glue/topics/glue">glue</a></span>(<span class="st">"{val_label}  = {value}"</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">    </span><span class="kw">distinct</span>(val_label)}
 
 ## Show value labels:
@@ -243,11 +244,11 @@ show_val_label =<span class="st"> </span>. %&gt;%<span class="st"> </span>{
 <span class="co">#&gt; 2     Distance-education only  = 1</span></code></pre></div>
 <p>In binding multiple years of data with <code>dyplr::bind_rows()</code>, however, labels will get dropped. To throw back the labels, <code>scorecard</code> also provides to simple functions that attach variable and value labels to the tibbles:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">bind_rows</span>(
-  scorecard::mf2014_15 %&gt;%<span class="st"> </span><span class="kw">select</span>(mf_year, instnm, control, adm_rate),
-  scorecard::mf2013_14 %&gt;%<span class="st"> </span><span class="kw">select</span>(mf_year, instnm, control, adm_rate)
-) %&gt;%<span class="st"> </span>
-<span class="st">  </span>scorecard::<span class="kw"><a href="reference/attach_var_label.html">attach_var_label</a></span>() %&gt;%<span class="st"> </span>
-<span class="st">  </span>scorecard::<span class="kw"><a href="reference/attach_val_label.html">attach_val_label</a></span>() -&gt;<span class="st"> </span>df
+  scorecard<span class="op">::</span>mf2014_<span class="dv">15</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(mf_year, instnm, control, adm_rate),
+  scorecard<span class="op">::</span>mf2013_<span class="dv">14</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(mf_year, instnm, control, adm_rate)
+) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>scorecard<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/scorecard/topics/attach_var_label">attach_var_label</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>scorecard<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/scorecard/topics/attach_val_label">attach_val_label</a></span>() -&gt;<span class="st"> </span>df
 
 df
 <span class="co">#&gt; # A tibble: 15,507 x 4</span>
@@ -264,7 +265,7 @@ df
 <span class="co">#&gt;  9 2014-15     Auburn University at Montgomery         1   0.8017</span>
 <span class="co">#&gt; 10 2014-15                   Auburn University         1   0.8347</span>
 <span class="co">#&gt; # ... with 15,497 more rows</span>
-labelled::<span class="kw">var_label</span>(df)
+labelled<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/labelled/topics/var_label">var_label</a></span>(df)
 <span class="co">#&gt; $mf_year</span>
 <span class="co">#&gt; NULL</span>
 <span class="co">#&gt; </span>
@@ -276,7 +277,7 @@ labelled::<span class="kw">var_label</span>(df)
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $adm_rate</span>
 <span class="co">#&gt; [1] "Admission rate"</span>
-labelled::<span class="kw">val_labels</span>(df)
+labelled<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/labelled/topics/val_labels">val_labels</a></span>(df)
 <span class="co">#&gt; $mf_year</span>
 <span class="co">#&gt; NULL</span>
 <span class="co">#&gt; </span>
@@ -295,10 +296,10 @@ labelled::<span class="kw">val_labels</span>(df)
 <a href="#exploring-codebook-and-plot-in-state-tuition-with-a-joyplot" class="anchor"></a>Exploring codebook and plot in-state tuition with a joyplot</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vars =<span class="st"> </span><span class="kw">c</span>(<span class="st">"mf_year"</span>, <span class="st">"iclevel"</span>, <span class="st">"control"</span>, <span class="st">"tuitionfee_in"</span>)
 
-scorecard::codebook %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">select</span>(var_name, var_label, value, val_label) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">filter</span>(var_name %in%<span class="st"> </span>vars) %&gt;%<span class="st"> </span>
-<span class="st">  </span>knitr::<span class="kw">kable</span>()</code></pre></div>
+scorecard<span class="op">::</span>codebook <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(var_name, var_label, value, val_label) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(var_name <span class="op">%in%</span><span class="st"> </span>vars) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/knitr/topics/kable">kable</a></span>()</code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">var_name</th>
@@ -352,18 +353,18 @@ scorecard::codebook %&gt;%<span class="st"> </span>
 </tbody>
 </table>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
-dplyr_seq =<span class="st"> </span>. %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">select</span>(<span class="kw">one_of</span>(vars)) %&gt;%
-<span class="st">  </span>haven::<span class="kw">as_factor</span>() %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">filter</span>(iclevel %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">"4-year"</span>, <span class="st">"2-year"</span>)) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">year =</span> mf_year %&gt;%<span class="st"> </span><span class="kw">parse_number</span>() %&gt;%<span class="st"> </span><span class="kw">as.factor</span>()) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">group_by</span>(iclevel, control) %&gt;%<span class="st"> </span>
+dplyr_seq =<span class="st"> </span>. <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="kw">one_of</span>(vars)) <span class="op">%&gt;%</span>
+<span class="st">  </span>haven<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/haven/topics/as_factor">as_factor</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(iclevel <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">"4-year"</span>, <span class="st">"2-year"</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">year =</span> mf_year <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">parse_number</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.factor</span>()) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(iclevel, control) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate_at</span>(<span class="kw">c</span>(<span class="st">"tuitionfee_in"</span>),
-            ~statar::<span class="kw">winsorise</span>(., <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.02</span>, <span class="fl">0.98</span>), <span class="dt">verbose =</span> <span class="ot">FALSE</span>)) %&gt;%<span class="st"> </span>
+            <span class="op">~</span>statar<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/statar/topics/winsorize">winsorise</a></span>(., <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.02</span>, <span class="fl">0.98</span>), <span class="dt">verbose =</span> <span class="ot">FALSE</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ungroup</span>()
 
 ## Test the functional sequence
-scorecard::mf2014_15 %&gt;%<span class="st"> </span><span class="kw">dplyr_seq</span>()
+scorecard<span class="op">::</span>mf2014_<span class="dv">15</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dplyr_seq</span>()
 <span class="co">#&gt; # A tibble: 5,530 x 5</span>
 <span class="co">#&gt;    mf_year iclevel           control tuitionfee_in   year</span>
 <span class="co">#&gt;      &lt;chr&gt;  &lt;fctr&gt;            &lt;fctr&gt;         &lt;dbl&gt; &lt;fctr&gt;</span>
@@ -380,33 +381,33 @@ scorecard::mf2014_15 %&gt;%<span class="st"> </span><span class="kw">dplyr_seq</
 <span class="co">#&gt; # ... with 5,520 more rows</span>
 
 <span class="kw">bind_rows</span>(
-  scorecard::mf2014_15 %&gt;%<span class="st"> </span><span class="kw">dplyr_seq</span>(),
-  scorecard::mf2013_14 %&gt;%<span class="st"> </span><span class="kw">dplyr_seq</span>(),
-  scorecard::mf2012_13 %&gt;%<span class="st"> </span><span class="kw">dplyr_seq</span>(),
-  scorecard::mf2011_12 %&gt;%<span class="st"> </span><span class="kw">dplyr_seq</span>(),
-  scorecard::mf2010_11 %&gt;%<span class="st"> </span><span class="kw">dplyr_seq</span>(),
-  scorecard::mf2009_10 %&gt;%<span class="st"> </span><span class="kw">dplyr_seq</span>(),
-  scorecard::mf2008_09 %&gt;%<span class="st"> </span><span class="kw">dplyr_seq</span>(),
-  scorecard::mf2007_08 %&gt;%<span class="st"> </span><span class="kw">dplyr_seq</span>(),
-  scorecard::mf2006_07 %&gt;%<span class="st"> </span><span class="kw">dplyr_seq</span>(),
-  scorecard::mf2005_06 %&gt;%<span class="st"> </span><span class="kw">dplyr_seq</span>(),
-  scorecard::mf2004_05 %&gt;%<span class="st"> </span><span class="kw">dplyr_seq</span>(),
-  scorecard::mf2003_04 %&gt;%<span class="st"> </span><span class="kw">dplyr_seq</span>(),
-  scorecard::mf2002_03 %&gt;%<span class="st"> </span><span class="kw">dplyr_seq</span>(),
-  scorecard::mf2001_02 %&gt;%<span class="st"> </span><span class="kw">dplyr_seq</span>(),
-  scorecard::mf2000_01 %&gt;%<span class="st"> </span><span class="kw">dplyr_seq</span>()
+  scorecard<span class="op">::</span>mf2014_<span class="dv">15</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dplyr_seq</span>(),
+  scorecard<span class="op">::</span>mf2013_<span class="dv">14</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dplyr_seq</span>(),
+  scorecard<span class="op">::</span>mf2012_<span class="dv">13</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dplyr_seq</span>(),
+  scorecard<span class="op">::</span>mf2011_<span class="dv">12</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dplyr_seq</span>(),
+  scorecard<span class="op">::</span>mf2010_<span class="dv">11</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dplyr_seq</span>(),
+  scorecard<span class="op">::</span>mf2009_<span class="dv">10</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dplyr_seq</span>(),
+  scorecard<span class="op">::</span>mf2008_<span class="dv">09</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dplyr_seq</span>(),
+  scorecard<span class="op">::</span>mf2007_<span class="dv">08</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dplyr_seq</span>(),
+  scorecard<span class="op">::</span>mf2006_<span class="dv">07</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dplyr_seq</span>(),
+  scorecard<span class="op">::</span>mf2005_<span class="dv">06</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dplyr_seq</span>(),
+  scorecard<span class="op">::</span>mf2004_<span class="dv">05</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dplyr_seq</span>(),
+  scorecard<span class="op">::</span>mf2003_<span class="dv">04</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dplyr_seq</span>(),
+  scorecard<span class="op">::</span>mf2002_<span class="dv">03</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dplyr_seq</span>(),
+  scorecard<span class="op">::</span>mf2001_<span class="dv">02</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dplyr_seq</span>(),
+  scorecard<span class="op">::</span>mf2000_<span class="dv">01</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dplyr_seq</span>()
 ) -&gt;<span class="st"> </span>df
 
-df %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> tuitionfee_in, <span class="dt">y =</span> year, <span class="dt">fill =</span> iclevel)) +
-<span class="st">  </span>ggjoy::<span class="kw">geom_joy</span>(<span class="dt">scale =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> .<span class="dv">8</span>, <span class="dt">colour =</span> <span class="st">"white"</span>) +
-<span class="st">  </span>ggjoy::<span class="kw">theme_joy</span>() +
-<span class="st">  </span><span class="kw">facet_grid</span>(iclevel~control, <span class="dt">scales =</span> <span class="st">"free"</span>) +
+df <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> tuitionfee_in, <span class="dt">y =</span> year, <span class="dt">fill =</span> iclevel)) <span class="op">+</span>
+<span class="st">  </span>ggjoy<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggjoy/topics/geom_joy">geom_joy</a></span>(<span class="dt">scale =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> .<span class="dv">8</span>, <span class="dt">colour =</span> <span class="st">"white"</span>) <span class="op">+</span>
+<span class="st">  </span>ggjoy<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggjoy/topics/theme_joy">theme_joy</a></span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_grid</span>(iclevel<span class="op">~</span>control, <span class="dt">scales =</span> <span class="st">"free"</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="ot">NULL</span>, <span class="dt">y =</span> <span class="ot">NULL</span>,
-       <span class="dt">title =</span> <span class="st">"In-State Tuition and Fees, 2000-2014"</span>) +
-<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">labels =</span> scales::dollar) +
-<span class="st">  </span><span class="kw">scale_y_discrete</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">2014</span>, <span class="dv">2000</span>, -<span class="dv">3</span>), 
-                   <span class="dt">expand =</span> <span class="kw">c</span>(<span class="fl">0.01</span>, <span class="dv">0</span>)) +
+       <span class="dt">title =</span> <span class="st">"In-State Tuition and Fees, 2000-2014"</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>dollar) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_discrete</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">2014</span>, <span class="dv">2000</span>, <span class="op">-</span><span class="dv">3</span>),
+                   <span class="dt">expand =</span> <span class="kw">c</span>(<span class="fl">0.01</span>, <span class="dv">0</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">8</span>),
         <span class="dt">legend.position =</span> <span class="st">"none"</span>)</code></pre></div>
 <p><img src="README-files/in_tuition-1.png" width="672"></p>
@@ -416,24 +417,24 @@ df %&gt;%<span class="st"> </span>
 <a href="#compareing-in-state-and-out-of-state-tuition-and-fees" class="anchor"></a>Compareing in-state and out-of-state tuition and fees</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vars =<span class="st"> </span><span class="kw">c</span>(<span class="st">"mf_year"</span>, <span class="st">"iclevel"</span>, <span class="st">"control"</span>, <span class="st">"tuitionfee_in"</span>, <span class="st">"tuitionfee_out"</span>)
 
-dplyr_seq =<span class="st"> </span>. %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">select</span>(<span class="kw">one_of</span>(vars)) %&gt;%
-<span class="st">  </span>haven::<span class="kw">as_factor</span>() %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">filter</span>(iclevel %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">"4-year"</span>, <span class="st">"2-year"</span>)) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">filter</span>(control ==<span class="st"> "Public"</span>) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">type =</span> <span class="kw">paste</span>(control, iclevel)) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">year =</span> mf_year %&gt;%<span class="st"> </span><span class="kw">parse_number</span>() %&gt;%<span class="st"> </span><span class="kw">as.factor</span>()) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">group_by</span>(type) %&gt;%<span class="st"> </span>
+dplyr_seq =<span class="st"> </span>. <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="kw">one_of</span>(vars)) <span class="op">%&gt;%</span>
+<span class="st">  </span>haven<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/haven/topics/as_factor">as_factor</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(iclevel <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">"4-year"</span>, <span class="st">"2-year"</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(control <span class="op">==</span><span class="st"> "Public"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">type =</span> <span class="kw">paste</span>(control, iclevel)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">year =</span> mf_year <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">parse_number</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.factor</span>()) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(type) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate_at</span>(<span class="kw">c</span>(<span class="st">"tuitionfee_in"</span>, <span class="st">"tuitionfee_out"</span>),
-            ~statar::<span class="kw">winsorise</span>(., <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.02</span>, <span class="fl">0.98</span>), <span class="dt">verbose =</span> <span class="ot">FALSE</span>)) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">ungroup</span>() %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">gather</span>(in_or_out, tuitionfee, tuitionfee_in:tuitionfee_out) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">in_or_out =</span> <span class="kw">if_else</span>(in_or_out ==<span class="st"> "tuitionfee_in"</span>,
+            <span class="op">~</span>statar<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/statar/topics/winsorize">winsorise</a></span>(., <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.02</span>, <span class="fl">0.98</span>), <span class="dt">verbose =</span> <span class="ot">FALSE</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">gather</span>(in_or_out, tuitionfee, tuitionfee_in<span class="op">:</span>tuitionfee_out) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">in_or_out =</span> <span class="kw">if_else</span>(in_or_out <span class="op">==</span><span class="st"> "tuitionfee_in"</span>,
                               <span class="st">"In-state tuition and fees"</span>,
                               <span class="st">"Out-of-state tuition and fees"</span>))
 
 ## Test the functional sequence
-scorecard::mf2014_15 %&gt;%<span class="st"> </span><span class="kw">dplyr_seq</span>()
+scorecard<span class="op">::</span>mf2014_<span class="dv">15</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dplyr_seq</span>()
 <span class="co">#&gt; # A tibble: 3,600 x 7</span>
 <span class="co">#&gt;    mf_year iclevel control          type   year                 in_or_out</span>
 <span class="co">#&gt;      &lt;chr&gt;  &lt;fctr&gt;  &lt;fctr&gt;         &lt;chr&gt; &lt;fctr&gt;                     &lt;chr&gt;</span>
@@ -450,34 +451,34 @@ scorecard::mf2014_15 %&gt;%<span class="st"> </span><span class="kw">dplyr_seq</
 <span class="co">#&gt; # ... with 3,590 more rows, and 1 more variables: tuitionfee &lt;dbl&gt;</span>
 
 <span class="kw">bind_rows</span>(
-  scorecard::mf2014_15 %&gt;%<span class="st"> </span><span class="kw">dplyr_seq</span>(),
-  scorecard::mf2013_14 %&gt;%<span class="st"> </span><span class="kw">dplyr_seq</span>(),
-  scorecard::mf2012_13 %&gt;%<span class="st"> </span><span class="kw">dplyr_seq</span>(),
-  scorecard::mf2011_12 %&gt;%<span class="st"> </span><span class="kw">dplyr_seq</span>(),
-  scorecard::mf2010_11 %&gt;%<span class="st"> </span><span class="kw">dplyr_seq</span>(),
-  scorecard::mf2009_10 %&gt;%<span class="st"> </span><span class="kw">dplyr_seq</span>(),
-  scorecard::mf2008_09 %&gt;%<span class="st"> </span><span class="kw">dplyr_seq</span>(),
-  scorecard::mf2007_08 %&gt;%<span class="st"> </span><span class="kw">dplyr_seq</span>(),
-  scorecard::mf2006_07 %&gt;%<span class="st"> </span><span class="kw">dplyr_seq</span>(),
-  scorecard::mf2005_06 %&gt;%<span class="st"> </span><span class="kw">dplyr_seq</span>(),
-  scorecard::mf2004_05 %&gt;%<span class="st"> </span><span class="kw">dplyr_seq</span>(),
-  scorecard::mf2003_04 %&gt;%<span class="st"> </span><span class="kw">dplyr_seq</span>(),
-  scorecard::mf2002_03 %&gt;%<span class="st"> </span><span class="kw">dplyr_seq</span>(),
-  scorecard::mf2001_02 %&gt;%<span class="st"> </span><span class="kw">dplyr_seq</span>(),
-  scorecard::mf2000_01 %&gt;%<span class="st"> </span><span class="kw">dplyr_seq</span>()
+  scorecard<span class="op">::</span>mf2014_<span class="dv">15</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dplyr_seq</span>(),
+  scorecard<span class="op">::</span>mf2013_<span class="dv">14</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dplyr_seq</span>(),
+  scorecard<span class="op">::</span>mf2012_<span class="dv">13</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dplyr_seq</span>(),
+  scorecard<span class="op">::</span>mf2011_<span class="dv">12</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dplyr_seq</span>(),
+  scorecard<span class="op">::</span>mf2010_<span class="dv">11</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dplyr_seq</span>(),
+  scorecard<span class="op">::</span>mf2009_<span class="dv">10</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dplyr_seq</span>(),
+  scorecard<span class="op">::</span>mf2008_<span class="dv">09</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dplyr_seq</span>(),
+  scorecard<span class="op">::</span>mf2007_<span class="dv">08</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dplyr_seq</span>(),
+  scorecard<span class="op">::</span>mf2006_<span class="dv">07</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dplyr_seq</span>(),
+  scorecard<span class="op">::</span>mf2005_<span class="dv">06</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dplyr_seq</span>(),
+  scorecard<span class="op">::</span>mf2004_<span class="dv">05</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dplyr_seq</span>(),
+  scorecard<span class="op">::</span>mf2003_<span class="dv">04</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dplyr_seq</span>(),
+  scorecard<span class="op">::</span>mf2002_<span class="dv">03</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dplyr_seq</span>(),
+  scorecard<span class="op">::</span>mf2001_<span class="dv">02</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dplyr_seq</span>(),
+  scorecard<span class="op">::</span>mf2000_<span class="dv">01</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dplyr_seq</span>()
 ) -&gt;<span class="st"> </span>df
 
-df %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> tuitionfee, <span class="dt">y =</span> year, <span class="dt">fill =</span> in_or_out)) +
-<span class="st">  </span>ggjoy::<span class="kw">geom_joy</span>(<span class="dt">scale =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> .<span class="dv">8</span>, <span class="dt">colour =</span> <span class="st">"white"</span>) +
-<span class="st">  </span>ggjoy::<span class="kw">theme_joy</span>() +
-<span class="st">  </span><span class="kw">facet_wrap</span>(~type, <span class="dt">scales =</span> <span class="st">"free"</span>) +
+df <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> tuitionfee, <span class="dt">y =</span> year, <span class="dt">fill =</span> in_or_out)) <span class="op">+</span>
+<span class="st">  </span>ggjoy<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggjoy/topics/geom_joy">geom_joy</a></span>(<span class="dt">scale =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> .<span class="dv">8</span>, <span class="dt">colour =</span> <span class="st">"white"</span>) <span class="op">+</span>
+<span class="st">  </span>ggjoy<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggjoy/topics/theme_joy">theme_joy</a></span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>type, <span class="dt">scales =</span> <span class="st">"free"</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="ot">NULL</span>, <span class="dt">y =</span> <span class="ot">NULL</span>,
        <span class="dt">title =</span> <span class="st">"In-State Vs. Out-of-State Tuition and Fees for Public Colleges"</span>,
-       <span class="dt">caption =</span> <span class="st">"Source: College Scorecard, 2000-2014"</span>) +
-<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">labels =</span> scales::dollar) +
-<span class="st">  </span><span class="kw">scale_y_discrete</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">2014</span>, <span class="dv">2000</span>, -<span class="dv">3</span>), 
-                   <span class="dt">expand =</span> <span class="kw">c</span>(<span class="fl">0.01</span>, <span class="dv">0</span>)) +
+       <span class="dt">caption =</span> <span class="st">"Source: College Scorecard, 2000-2014"</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>dollar) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_discrete</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">2014</span>, <span class="dv">2000</span>, <span class="op">-</span><span class="dv">3</span>),
+                   <span class="dt">expand =</span> <span class="kw">c</span>(<span class="fl">0.01</span>, <span class="dv">0</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">9</span>),
         <span class="dt">legend.position =</span> <span class="st">"top"</span>,
         <span class="dt">legend.title =</span> <span class="kw">element_blank</span>(),
