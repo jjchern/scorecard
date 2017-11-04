@@ -1,7 +1,7 @@
 Package: scorecard
 Type: Package
 Title: College Scorecard Data, 1996-2014
-Version: 0.2.1
+Version: 0.3.0
 Authors@R: person("JJ", "Chen", , "jiajia.chern@gmail.com", c("aut", "cre"))
 Description: Contains data from the College Scorecard <https://collegescorecard.ed.gov>.
 Depends:
