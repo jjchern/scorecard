@@ -1,53 +1,68 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-About `scorecard`
-=================
 
-[![Travis-CI Build Status](https://travis-ci.org/jjchern/scorecard.svg?branch=master)](https://travis-ci.org/jjchern/scorecard) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/jjchern/scorecard?branch=master&svg=true)](https://ci.appveyor.com/project/jjchern/scorecard)
+# About `scorecard`
 
-The `scorecard` package includes processed datasets from the [College Scorecard](https://collegescorecard.ed.gov), 1996-2015.
+[![Travis-CI Build
+Status](https://travis-ci.org/jjchern/scorecard.svg?branch=master)](https://travis-ci.org/jjchern/scorecard)
+[![AppVeyor Build
+Status](https://ci.appveyor.com/api/projects/status/github/jjchern/scorecard?branch=master&svg=true)](https://ci.appveyor.com/project/jjchern/scorecard)
 
-The Scorecard datasets are imbalance panels at the colleges-by-school-year level. The data was last updated in 2017. See the [changelog](https://collegescorecard.ed.gov/data/changelog/) for more details.
+The `scorecard` package includes processed datasets from the [College
+Scorecard](https://collegescorecard.ed.gov), 1996-2015.
+
+The Scorecard datasets are imbalance panels at the
+colleges-by-school-year level. The data was last updated in 2017. See
+the [changelog](https://collegescorecard.ed.gov/data/changelog/) for
+more details.
 
 The following datasets are available:
 
--   `scorecard::mf1996_97`
--   `scorecard::mf1997_98`
--   `scorecard::mf1998_99`
--   `scorecard::mf1999_00`
--   `scorecard::mf2000_01`
--   `scorecard::mf2001_02`
--   `scorecard::mf2002_03`
--   `scorecard::mf2003_04`
--   `scorecard::mf2004_05`
--   `scorecard::mf2005_06`
--   `scorecard::mf2006_07`
--   `scorecard::mf2007_08`
--   `scorecard::mf2008_09`
--   `scorecard::mf2009_10`
--   `scorecard::mf2010_11`
--   `scorecard::mf2011_12`
--   `scorecard::mf2012_13`
--   `scorecard::mf2013_14`
--   `scorecard::mf2014_15`
--   `scorecard::mf2015_16`
--   `scorecard::codebook`
--   `scorecard::cohort_map`
+  - `scorecard::mf1996_97`
+  - `scorecard::mf1997_98`
+  - `scorecard::mf1998_99`
+  - `scorecard::mf1999_00`
+  - `scorecard::mf2000_01`
+  - `scorecard::mf2001_02`
+  - `scorecard::mf2002_03`
+  - `scorecard::mf2003_04`
+  - `scorecard::mf2004_05`
+  - `scorecard::mf2005_06`
+  - `scorecard::mf2006_07`
+  - `scorecard::mf2007_08`
+  - `scorecard::mf2008_09`
+  - `scorecard::mf2009_10`
+  - `scorecard::mf2010_11`
+  - `scorecard::mf2011_12`
+  - `scorecard::mf2012_13`
+  - `scorecard::mf2013_14`
+  - `scorecard::mf2014_15`
+  - `scorecard::mf2015_16`
+  - `scorecard::mf2016_17`
+  - `scorecard::mf2017_18`
+  - `scorecard::codebook`
+  - `scorecard::cohort_map`
 
 The following functions are implemented:
 
--   `scorecard::attach_var_label()`: Assign variable labels.
--   `scorecard::attach_val_label()`: Assign value labels for certain variables
+  - `scorecard::attach_var_label()`: Assign variable labels.
+  - `scorecard::attach_val_label()`: Assign value labels for certain
+    variables
 
-Related R Package
-=================
+# Related R Package
 
-[Benjamin Skinner](https://github.com/btskinner) has created a wonderful R client [`rscorecard`](http://btskinner.me/rscorecard/) for the [College Scorecard GET API](https://collegescorecard.ed.gov/data/documentation/). If you're interested in getting some specific variables quickly, I suggest using the `rscorecard` package.
+[Benjamin Skinner](https://github.com/btskinner) has created a wonderful
+R client [`rscorecard`](http://btskinner.me/rscorecard/) for the
+[College Scorecard GET
+API](https://collegescorecard.ed.gov/data/documentation/). If you’re
+interested in getting some specific variables quickly, I suggest using
+the `rscorecard` package.
 
-Installation
-============
+# Installation
 
-You can also download the datasets as an R package. It might take a while to install and load into memory. To download the most recent stable release, use
+You can also download the datasets as an R package. It might take a
+while to install and load into memory. To download the most recent
+stable release, use
 
 ``` r
 # install.packages("devtools")
@@ -57,40 +72,31 @@ devtools::install_github("jjchern/scorecard@v0.3.0")
 # remove.packages("scorecard")
 ```
 
-Examples
-========
+# Examples
 
-Loading the merged file for school year 2014-15
------------------------------------------------
+## Loading the merged file for school year 2014-15
 
 All datasets are tibbles:
 
 ``` r
 library(tidyverse)
 scorecard::mf2014_15
-#> # A tibble: 7,703 x 1,744
-#>    mf_year unitid    opeid opeid6                              instnm
-#>      <chr>  <dbl>    <chr>  <chr>                               <chr>
-#>  1 2014-15 100654 00100200 001002            Alabama A & M University
-#>  2 2014-15 100663 00105200 001052 University of Alabama at Birmingham
-#>  3 2014-15 100690 02503400 025034                  Amridge University
-#>  4 2014-15 100706 00105500 001055 University of Alabama in Huntsville
-#>  5 2014-15 100724 00100500 001005            Alabama State University
-#>  6 2014-15 100751 00105100 001051           The University of Alabama
-#>  7 2014-15 100760 00100700 001007   Central Alabama Community College
-#>  8 2014-15 100812 00100800 001008             Athens State University
-#>  9 2014-15 100830 00831000 008310     Auburn University at Montgomery
-#> 10 2014-15 100858 00100900 001009                   Auburn University
-#> # ... with 7,693 more rows, and 1739 more variables: city <chr>,
-#> #   stabbr <chr>, zip <chr>, accredagency <chr>, insturl <chr>,
-#> #   npcurl <chr>, sch_deg <chr>, hcm2 <dbl>, main <dbl+lbl>,
-#> #   numbranch <dbl>, preddeg <dbl+lbl>, highdeg <dbl+lbl>,
-#> #   control <dbl+lbl>, st_fips <dbl+lbl>, region <dbl+lbl>,
-#> #   locale <dbl+lbl>, locale2 <dbl+lbl>, latitude <dbl>, longitude <dbl>,
-#> #   ccbasic <dbl+lbl>, ccugprof <dbl+lbl>, ccsizset <dbl+lbl>,
-#> #   hbcu <dbl+lbl>, pbi <dbl+lbl>, annhi <dbl+lbl>, tribal <dbl+lbl>,
-#> #   aanapii <dbl+lbl>, hsi <dbl+lbl>, nanti <dbl+lbl>, menonly <dbl+lbl>,
-#> #   womenonly <dbl+lbl>, relaffil <dbl+lbl>, adm_rate <dbl>,
+#> # A tibble: 7,703 x 1,660
+#>    mf_year unitid opeid opeid6 instnm city  stabbr zip   sch_deg    main
+#>    <chr>   <chr>  <chr> <chr>  <chr>  <chr> <chr>  <chr>   <dbl> <dbl+l>
+#>  1 2014-15 100654 0010… 001002 Alaba… Norm… AL     35762       3 1 [Mai…
+#>  2 2014-15 100663 0010… 001052 Unive… Birm… AL     3529…       3 1 [Mai…
+#>  3 2014-15 100690 0250… 025034 Amrid… Mont… AL     3611…       3 1 [Mai…
+#>  4 2014-15 100706 0010… 001055 Unive… Hunt… AL     35899       3 1 [Mai…
+#>  5 2014-15 100724 0010… 001005 Alaba… Mont… AL     3610…       3 1 [Mai…
+#>  6 2014-15 100751 0010… 001051 The U… Tusc… AL     3548…       3 1 [Mai…
+#>  7 2014-15 100760 0010… 001007 Centr… Alex… AL     35010       2 1 [Mai…
+#>  8 2014-15 100812 0010… 001008 Athen… Athe… AL     35611       3 1 [Mai…
+#>  9 2014-15 100830 0083… 008310 Aubur… Mont… AL     3611…       3 1 [Mai…
+#> 10 2014-15 100858 0010… 001009 Aubur… Aubu… AL     36849       3 1 [Mai…
+#> # … with 7,693 more rows, and 1,650 more variables: numbranch <dbl>,
+#> #   preddeg <dbl+lbl>, highdeg <dbl+lbl>, control <dbl+lbl>,
+#> #   st_fips <dbl+lbl>, region <dbl+lbl>, adm_rate <dbl>,
 #> #   adm_rate_all <dbl>, satvr25 <dbl>, satvr75 <dbl>, satmt25 <dbl>,
 #> #   satmt75 <dbl>, satwr25 <dbl>, satwr75 <dbl>, satvrmid <dbl>,
 #> #   satmtmid <dbl>, satwrmid <dbl>, actcm25 <dbl>, actcm75 <dbl>,
@@ -106,13 +112,21 @@ scorecard::mf2014_15
 #> #   pcip46 <dbl>, pcip47 <dbl>, pcip48 <dbl>, pcip49 <dbl>, pcip50 <dbl>,
 #> #   pcip51 <dbl>, pcip52 <dbl>, pcip54 <dbl>, cip01cert1 <dbl+lbl>,
 #> #   cip01cert2 <dbl+lbl>, cip01assoc <dbl+lbl>, cip01cert4 <dbl>,
-#> #   cip01bachl <dbl>, ...
+#> #   cip01bachl <dbl>, cip03cert1 <dbl>, cip03cert2 <dbl>,
+#> #   cip03assoc <dbl>, cip03cert4 <dbl>, cip03bachl <dbl>,
+#> #   cip04cert1 <dbl>, cip04cert2 <dbl>, cip04assoc <dbl>,
+#> #   cip04cert4 <dbl>, cip04bachl <dbl>, cip05cert1 <dbl>,
+#> #   cip05cert2 <dbl>, cip05assoc <dbl>, cip05cert4 <dbl>,
+#> #   cip05bachl <dbl>, cip09cert1 <dbl>, cip09cert2 <dbl>,
+#> #   cip09assoc <dbl>, cip09cert4 <dbl>, cip09bachl <dbl>,
+#> #   cip10cert1 <dbl>, cip10cert2 <dbl>, cip10assoc <dbl>,
+#> #   cip10cert4 <dbl>, cip10bachl <dbl>, cip11cert1 <dbl>, …
 ```
 
-Working with variable and value labels
---------------------------------------
+## Working with variable and value labels
 
-All the datasets have variable labels attached, which can be viewed in RStudio's Data Viewer:
+All the datasets have variable labels attached, which can be viewed in
+RStudio’s Data Viewer:
 
 ``` r
 View(scorecard::mf2014_15)
@@ -157,20 +171,20 @@ Or work with the codebook directly:
 ## Show variable labels
 scorecard::codebook %>% 
   select(var_name, var_label)
-#> # A tibble: 1,975 x 2
-#>        var_name                                  var_label
-#>           <chr>                                      <chr>
-#>  1       unitid                    Unit ID for institution
-#>  2        opeid             8-digit OPE ID for institution
-#>  3       opeid6             6-digit OPE ID for institution
-#>  4       instnm                           Institution name
-#>  5         city                                       City
-#>  6       stabbr                             State postcode
-#>  7          zip                                   ZIP code
-#>  8 accredagency                 Accreditor for institution
-#>  9      insturl             URL for institution's homepage
-#> 10       npcurl URL for institution's net price calculator
-#> # ... with 1,965 more rows
+#> # A tibble: 2,231 x 2
+#>    var_name     var_label                                 
+#>    <chr>        <chr>                                     
+#>  1 unitid       Unit ID for institution                   
+#>  2 opeid        8-digit OPE ID for institution            
+#>  3 opeid6       6-digit OPE ID for institution            
+#>  4 instnm       Institution name                          
+#>  5 city         City                                      
+#>  6 stabbr       State postcode                            
+#>  7 zip          ZIP code                                  
+#>  8 accredagency Accreditor for institution                
+#>  9 insturl      URL for institution's homepage            
+#> 10 npcurl       URL for institution's net price calculator
+#> # … with 2,221 more rows
 
 ## Build a small function to shown value labels
 show_val_label = . %>% {
@@ -181,72 +195,43 @@ show_val_label = . %>% {
 ## Show value labels:
 show_val_label("curroper")
 #> # A tibble: 2 x 1
-#>                                                  val_label
-#>                                                      <chr>
+#>   val_label                                               
+#>   <glue>                                                  
 #> 1 Not currently certified as an operating institution  = 0
-#> 2                    Currently certified as operating  = 1
+#> 2 Currently certified as operating  = 1
 show_val_label("distanceonly")
 #> # A tibble: 2 x 1
-#>                          val_label
-#>                              <chr>
+#>   val_label                       
+#>   <glue>                          
 #> 1 Not distance-education only  = 0
-#> 2     Distance-education only  = 1
+#> 2 Distance-education only  = 1
 ```
 
-In binding multiple years of data with `dyplr::bind_rows()`, however, labels will get dropped. To throw back the labels, `scorecard` also provides to simple functions that attach variable and value labels to the tibbles:
+<!-- In binding multiple years of data with `dyplr::bind_rows()`, however, labels will get dropped. To throw back the labels, `scorecard` also provides to simple functions that attach variable and value labels to the tibbles: -->
 
-``` r
-bind_rows(
-  scorecard::mf2014_15 %>% select(mf_year, instnm, control, adm_rate),
-  scorecard::mf2013_14 %>% select(mf_year, instnm, control, adm_rate)
-) %>% 
-  scorecard::attach_var_label() %>% 
-  scorecard::attach_val_label() -> df
+<!-- ```{r} -->
 
-df
-#> # A tibble: 15,507 x 4
-#>    mf_year                              instnm   control adm_rate
-#>      <chr>                               <chr> <dbl+lbl>    <dbl>
-#>  1 2014-15            Alabama A & M University         1   0.5256
-#>  2 2014-15 University of Alabama at Birmingham         1   0.8569
-#>  3 2014-15                  Amridge University         2       NA
-#>  4 2014-15 University of Alabama in Huntsville         1   0.8203
-#>  5 2014-15            Alabama State University         1   0.5326
-#>  6 2014-15           The University of Alabama         1   0.5105
-#>  7 2014-15   Central Alabama Community College         1       NA
-#>  8 2014-15             Athens State University         1       NA
-#>  9 2014-15     Auburn University at Montgomery         1   0.8017
-#> 10 2014-15                   Auburn University         1   0.8347
-#> # ... with 15,497 more rows
-labelled::var_label(df)
-#> $mf_year
-#> NULL
-#> 
-#> $instnm
-#> [1] "Institution name"
-#> 
-#> $control
-#> [1] "Control of institution"
-#> 
-#> $adm_rate
-#> [1] "Admission rate"
-labelled::val_labels(df)
-#> $mf_year
-#> NULL
-#> 
-#> $instnm
-#> NULL
-#> 
-#> $control
-#>             Public  Private nonprofit Private for-profit 
-#>                  1                  2                  3 
-#> 
-#> $adm_rate
-#> NULL
-```
+<!-- bind_rows( -->
 
-Exploring codebook and plot in-state tuition with a joyplot
------------------------------------------------------------
+<!--   scorecard::mf2014_15 %>% select(mf_year, instnm, control, adm_rate), -->
+
+<!--   scorecard::mf2013_14 %>% select(mf_year, instnm, control, adm_rate) -->
+
+<!-- ) %>%  -->
+
+<!--   scorecard::attach_var_label() %>%  -->
+
+<!--   scorecard::attach_val_label() -> df -->
+
+<!-- df -->
+
+<!-- labelled::var_label(df) -->
+
+<!-- labelled::val_labels(df) -->
+
+<!-- ``` -->
+
+## Exploring codebook and plot in-state tuition with a joyplot
 
 ``` r
 vars = c("mf_year", "iclevel", "control", "tuitionfee_in")
@@ -257,15 +242,15 @@ scorecard::codebook %>%
   knitr::kable()
 ```
 
-| var\_name      | var\_label                |  value| val\_label         |
-|:---------------|:--------------------------|------:|:-------------------|
-| control        | Control of institution    |      1| Public             |
-| control        | Control of institution    |      2| Private nonprofit  |
-| control        | Control of institution    |      3| Private for-profit |
-| tuitionfee\_in | In-state tuition and fees |     NA| NA                 |
-| iclevel        | Level of institution      |      1| 4-year             |
-| iclevel        | Level of institution      |      2| 2-year             |
-| iclevel        | Level of institution      |      3| Less-than-2-year   |
+| var\_name      | var\_label                | value | val\_label         |
+| :------------- | :------------------------ | ----: | :----------------- |
+| control        | Control of institution    |     1 | Public             |
+| control        | Control of institution    |     2 | Private nonprofit  |
+| control        | Control of institution    |     3 | Private for-profit |
+| tuitionfee\_in | In-state tuition and fees |    NA | NA                 |
+| iclevel        | Level of institution      |     1 | 4-year             |
+| iclevel        | Level of institution      |     2 | 2-year             |
+| iclevel        | Level of institution      |     3 | Less-than-2-year   |
 
 ``` r
 
@@ -282,21 +267,24 @@ dplyr_seq = . %>%
 ## Test the functional sequence
 scorecard::mf2014_15 %>% dplyr_seq()
 #> # A tibble: 5,530 x 5
-#>    mf_year iclevel           control tuitionfee_in   year
-#>      <chr>  <fctr>            <fctr>         <dbl> <fctr>
-#>  1 2014-15  4-year            Public          9096   2014
-#>  2 2014-15  4-year            Public          7510   2014
-#>  3 2014-15  4-year Private nonprofit          6900   2014
-#>  4 2014-15  4-year            Public          9158   2014
-#>  5 2014-15  4-year            Public          8720   2014
-#>  6 2014-15  4-year            Public          9826   2014
-#>  7 2014-15  2-year            Public          3491   2014
-#>  8 2014-15  4-year            Public            NA   2014
-#>  9 2014-15  4-year            Public          9080   2014
-#> 10 2014-15  4-year            Public         10200   2014
-#> # ... with 5,520 more rows
+#>    mf_year iclevel control           tuitionfee_in year 
+#>    <chr>   <fct>   <fct>                     <dbl> <fct>
+#>  1 2014-15 4-year  Public                     9096 2014 
+#>  2 2014-15 4-year  Public                     7510 2014 
+#>  3 2014-15 4-year  Private nonprofit          6900 2014 
+#>  4 2014-15 4-year  Public                     9158 2014 
+#>  5 2014-15 4-year  Public                     8720 2014 
+#>  6 2014-15 4-year  Public                     9826 2014 
+#>  7 2014-15 2-year  Public                     3491 2014 
+#>  8 2014-15 4-year  Public                       NA 2014 
+#>  9 2014-15 4-year  Public                     9080 2014 
+#> 10 2014-15 4-year  Public                    10200 2014 
+#> # … with 5,520 more rows
 
 bind_rows(
+  scorecard::mf2017_18 %>% dplyr_seq(),
+  scorecard::mf2016_17 %>% dplyr_seq(),
+  scorecard::mf2015_16 %>% dplyr_seq(),
   scorecard::mf2014_15 %>% dplyr_seq(),
   scorecard::mf2013_14 %>% dplyr_seq(),
   scorecard::mf2012_13 %>% dplyr_seq(),
@@ -320,18 +308,17 @@ df %>%
   ggjoy::theme_joy() +
   facet_grid(iclevel~control, scales = "free") +
   labs(x = NULL, y = NULL,
-       title = "In-State Tuition and Fees, 2000-2014") +
+       title = "In-State Tuition and Fees, 2000-2017") +
   scale_x_continuous(labels = scales::dollar) +
-  scale_y_discrete(breaks = seq(2014, 2000, -3), 
+  scale_y_discrete(breaks = seq(2017, 2000, -3), 
                    expand = c(0.01, 0)) +
   theme(axis.text = element_text(size = 8),
         legend.position = "none")
 ```
 
-![](README-files/in_tuition-1.png)
+![](README-files/in_tuition-1.png)<!-- -->
 
-Compareing in-state and out-of-state tuition and fees
------------------------------------------------------
+## Compareing in-state and out-of-state tuition and fees
 
 ``` r
 vars = c("mf_year", "iclevel", "control", "tuitionfee_in", "tuitionfee_out")
@@ -355,21 +342,24 @@ dplyr_seq = . %>%
 ## Test the functional sequence
 scorecard::mf2014_15 %>% dplyr_seq()
 #> # A tibble: 3,600 x 7
-#>    mf_year iclevel control          type   year                 in_or_out
-#>      <chr>  <fctr>  <fctr>         <chr> <fctr>                     <chr>
-#>  1 2014-15  4-year  Public Public 4-year   2014 In-state tuition and fees
-#>  2 2014-15  4-year  Public Public 4-year   2014 In-state tuition and fees
-#>  3 2014-15  4-year  Public Public 4-year   2014 In-state tuition and fees
-#>  4 2014-15  4-year  Public Public 4-year   2014 In-state tuition and fees
-#>  5 2014-15  4-year  Public Public 4-year   2014 In-state tuition and fees
-#>  6 2014-15  2-year  Public Public 2-year   2014 In-state tuition and fees
-#>  7 2014-15  4-year  Public Public 4-year   2014 In-state tuition and fees
-#>  8 2014-15  4-year  Public Public 4-year   2014 In-state tuition and fees
-#>  9 2014-15  4-year  Public Public 4-year   2014 In-state tuition and fees
-#> 10 2014-15  2-year  Public Public 2-year   2014 In-state tuition and fees
-#> # ... with 3,590 more rows, and 1 more variables: tuitionfee <dbl>
+#>    mf_year iclevel control type        year  in_or_out           tuitionfee
+#>    <chr>   <fct>   <fct>   <chr>       <fct> <chr>                    <dbl>
+#>  1 2014-15 4-year  Public  Public 4-y… 2014  In-state tuition a…       9096
+#>  2 2014-15 4-year  Public  Public 4-y… 2014  In-state tuition a…       7510
+#>  3 2014-15 4-year  Public  Public 4-y… 2014  In-state tuition a…       9158
+#>  4 2014-15 4-year  Public  Public 4-y… 2014  In-state tuition a…       8720
+#>  5 2014-15 4-year  Public  Public 4-y… 2014  In-state tuition a…       9826
+#>  6 2014-15 2-year  Public  Public 2-y… 2014  In-state tuition a…       3491
+#>  7 2014-15 4-year  Public  Public 4-y… 2014  In-state tuition a…         NA
+#>  8 2014-15 4-year  Public  Public 4-y… 2014  In-state tuition a…       9080
+#>  9 2014-15 4-year  Public  Public 4-y… 2014  In-state tuition a…      10200
+#> 10 2014-15 2-year  Public  Public 2-y… 2014  In-state tuition a…       4320
+#> # … with 3,590 more rows
 
 bind_rows(
+  scorecard::mf2017_18 %>% dplyr_seq(),
+  scorecard::mf2016_17 %>% dplyr_seq(),
+  scorecard::mf2015_16 %>% dplyr_seq(),
   scorecard::mf2014_15 %>% dplyr_seq(),
   scorecard::mf2013_14 %>% dplyr_seq(),
   scorecard::mf2012_13 %>% dplyr_seq(),
@@ -394,9 +384,9 @@ df %>%
   facet_wrap(~type, scales = "free") +
   labs(x = NULL, y = NULL,
        title = "In-State Vs. Out-of-State Tuition and Fees for Public Colleges",
-       caption = "Source: College Scorecard, 2000-2014") +
+       caption = "Source: College Scorecard, 2000-2017") +
   scale_x_continuous(labels = scales::dollar) +
-  scale_y_discrete(breaks = seq(2014, 2000, -3), 
+  scale_y_discrete(breaks = seq(2017, 2000, -3), 
                    expand = c(0.01, 0)) +
   theme(axis.text = element_text(size = 9),
         legend.position = "top",
@@ -404,4 +394,4 @@ df %>%
         legend.justification = "center")
 ```
 
-![](README-files/in_or_out_tuition-1.png)
+![](README-files/in_or_out_tuition-1.png)<!-- -->

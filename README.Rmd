@@ -47,6 +47,8 @@ The following datasets are available:
 - `scorecard::mf2013_14`
 - `scorecard::mf2014_15`
 - `scorecard::mf2015_16`
+- `scorecard::mf2016_17`
+- `scorecard::mf2017_18`
 - `scorecard::codebook`
 - `scorecard::cohort_map`
 
@@ -119,20 +121,20 @@ show_val_label("curroper")
 show_val_label("distanceonly")
 ```
 
-In binding multiple years of data with `dyplr::bind_rows()`, however, labels will get dropped. To throw back the labels, `scorecard` also provides to simple functions that attach variable and value labels to the tibbles:
+<!-- In binding multiple years of data with `dyplr::bind_rows()`, however, labels will get dropped. To throw back the labels, `scorecard` also provides to simple functions that attach variable and value labels to the tibbles: -->
 
-```{r}
-bind_rows(
-  scorecard::mf2014_15 %>% select(mf_year, instnm, control, adm_rate),
-  scorecard::mf2013_14 %>% select(mf_year, instnm, control, adm_rate)
-) %>% 
-  scorecard::attach_var_label() %>% 
-  scorecard::attach_val_label() -> df
+<!-- ```{r} -->
+<!-- bind_rows( -->
+<!--   scorecard::mf2014_15 %>% select(mf_year, instnm, control, adm_rate), -->
+<!--   scorecard::mf2013_14 %>% select(mf_year, instnm, control, adm_rate) -->
+<!-- ) %>%  -->
+<!--   scorecard::attach_var_label() %>%  -->
+<!--   scorecard::attach_val_label() -> df -->
 
-df
-labelled::var_label(df)
-labelled::val_labels(df)
-```
+<!-- df -->
+<!-- labelled::var_label(df) -->
+<!-- labelled::val_labels(df) -->
+<!-- ``` -->
 
 ## Exploring codebook and plot in-state tuition with a joyplot
 
@@ -158,6 +160,9 @@ dplyr_seq = . %>%
 scorecard::mf2014_15 %>% dplyr_seq()
 
 bind_rows(
+  scorecard::mf2017_18 %>% dplyr_seq(),
+  scorecard::mf2016_17 %>% dplyr_seq(),
+  scorecard::mf2015_16 %>% dplyr_seq(),
   scorecard::mf2014_15 %>% dplyr_seq(),
   scorecard::mf2013_14 %>% dplyr_seq(),
   scorecard::mf2012_13 %>% dplyr_seq(),
@@ -181,9 +186,9 @@ df %>%
   ggjoy::theme_joy() +
   facet_grid(iclevel~control, scales = "free") +
   labs(x = NULL, y = NULL,
-       title = "In-State Tuition and Fees, 2000-2014") +
+       title = "In-State Tuition and Fees, 2000-2017") +
   scale_x_continuous(labels = scales::dollar) +
-  scale_y_discrete(breaks = seq(2014, 2000, -3), 
+  scale_y_discrete(breaks = seq(2017, 2000, -3), 
                    expand = c(0.01, 0)) +
   theme(axis.text = element_text(size = 8),
         legend.position = "none")
@@ -214,6 +219,9 @@ dplyr_seq = . %>%
 scorecard::mf2014_15 %>% dplyr_seq()
 
 bind_rows(
+  scorecard::mf2017_18 %>% dplyr_seq(),
+  scorecard::mf2016_17 %>% dplyr_seq(),
+  scorecard::mf2015_16 %>% dplyr_seq(),
   scorecard::mf2014_15 %>% dplyr_seq(),
   scorecard::mf2013_14 %>% dplyr_seq(),
   scorecard::mf2012_13 %>% dplyr_seq(),
@@ -238,9 +246,9 @@ df %>%
   facet_wrap(~type, scales = "free") +
   labs(x = NULL, y = NULL,
        title = "In-State Vs. Out-of-State Tuition and Fees for Public Colleges",
-       caption = "Source: College Scorecard, 2000-2014") +
+       caption = "Source: College Scorecard, 2000-2017") +
   scale_x_continuous(labels = scales::dollar) +
-  scale_y_discrete(breaks = seq(2014, 2000, -3), 
+  scale_y_discrete(breaks = seq(2017, 2000, -3), 
                    expand = c(0.01, 0)) +
   theme(axis.text = element_text(size = 9),
         legend.position = "top",
