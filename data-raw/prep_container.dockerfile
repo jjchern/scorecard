@@ -1,11 +1,11 @@
-FROM rocker/r-ver:3.4.2
+FROM rocker/r-ver:3.6.1
 LABEL maintainer="jjchern"
 RUN export DEBIAN_FRONTEND=noninteractive; apt-get -y update \
  && apt-get install -y git-core \
 	libxml2-dev \
 	make \
 	NULL
-RUN ["install2.r", "-r 'https://cloud.r-project.org'", "bindrcpp", "labelled", "readxl", "stringr", "dplyr", "purrr", "tidyr", "tibble", "tidyverse", "devtools", "hrbrthemes", "reshape2", "haven", "lattice", "colorspace", "yaml", "rlang", "foreign", "glue", "hunspell", "lambda.r", "modelr", "bindr", "plyr", "futile.logger", "munsell", "gtable", "cellranger", "psych", "memoise", "labeling", "forcats", "extrafont", "Rttf2pt1", "broom", "Rcpp", "jsonlite", "mnormt", "hms", "digest", "stringi", "magrittr", "lazyeval", "futile.options", "extrafontdb", "pkgconfig", "xml2", "lubridate", "assertthat", "httr", "R6", "nlme", "remotes"]
-RUN ["installGithub.r", "tidyverse/readr@3ea8199", "hadley/ggplot2@9979112", "tidyverse/tidyselect@30a60b5", "jimhester/withr@8ba5e46", "hadley/rvest@9a51a5d", "hadley/scales@d767915", "slowkow/ggrepel@007318f"]
+RUN ["install2.r", "-r 'https://cloud.r-project.org'", "labelled", "readxl", "forcats", "stringr", "dplyr", "purrr", "readr", "tidyr", "tibble", "ggplot2", "tidyverse", "testthat", "devtools", "usethis", "Rcpp", "lubridate", "lattice", "clisymbols", "prettyunits", "ps", "utf8", "assertthat", "zeallot", "rprojroot", "digest", "R6", "cellranger", "futile.options", "backports", "httr", "pillar", "rlang", "lazyeval", "rstudioapi", "callr", "desc", "munsell", "broom", "modelr", "pkgconfig", "pkgbuild", "tidyselect", "fansi", "crayon", "withr", "nlme", "jsonlite", "gtable", "formatR", "magrittr", "scales", "cli", "stringi", "fs", "remotes", "xml2", "futile.logger", "ellipsis", "fortunes", "vctrs", "generics", "lambda.r", "glue", "hms", "processx", "pkgload", "yaml", "colorspace", "sessioninfo", "rvest", "memoise", "haven"]
+RUN ["installGithub.r", "tbradley1013/dundermifflin@8cf3e65"]
 WORKDIR /payload/
 CMD ["R"]
