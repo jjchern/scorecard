@@ -4,7 +4,7 @@
 \name{cohort_map}
 \alias{cohort_map}
 \title{Cohort Map}
-\format{An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 35540 rows and 3 columns.}
+\format{An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 43494 rows and 3 columns.}
 \source{
 \url{https://collegescorecard.ed.gov/data}
 }
