@@ -174,5 +174,5 @@ use_data(mf2017_18, overwrite = TRUE)
 
 container = dockerfile(from = sessionInfo(),
                        maintainer = "jjchern",
-                       r_version = "3.4.2")
+                       r_version = "3.6.1")
 write(container, "data-raw/prep_container.dockerfile")
