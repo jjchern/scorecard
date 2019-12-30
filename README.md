@@ -9,10 +9,10 @@ Status](https://travis-ci.org/jjchern/scorecard.svg?branch=master)](https://trav
 Status](https://ci.appveyor.com/api/projects/status/github/jjchern/scorecard?branch=master&svg=true)](https://ci.appveyor.com/project/jjchern/scorecard)
 
 The `scorecard` package includes processed datasets from the [College
-Scorecard](https://collegescorecard.ed.gov), 1996-2015.
+Scorecard](https://collegescorecard.ed.gov), 1996-2017.
 
 The Scorecard datasets are imbalance panels at the
-colleges-by-school-year level. The data was last updated in 2017. See
+colleges-by-school-year level. The data was last updated in 2019. See
 the [changelog](https://collegescorecard.ed.gov/data/changelog/) for
 more details.
 
@@ -66,7 +66,7 @@ stable release, use
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("jjchern/scorecard@v0.3.0")
+devtools::install_github("jjchern/scorecard@v0.4.0")
 
 # To uninstall the package, use:
 # remove.packages("scorecard")
@@ -231,7 +231,7 @@ show_val_label("distanceonly")
 
 <!-- ``` -->
 
-## Exploring codebook and plot in-state tuition with a joyplot
+## Exploring codebook and plot distributions of in-state tuition
 
 ``` r
 vars = c("mf_year", "iclevel", "control", "tuitionfee_in")
@@ -320,78 +320,8 @@ df %>%
 
 ## Compareing in-state and out-of-state tuition and fees
 
-``` r
-vars = c("mf_year", "iclevel", "control", "tuitionfee_in", "tuitionfee_out")
-
-dplyr_seq = . %>% 
-  select(one_of(vars)) %>%
-  haven::as_factor() %>% 
-  filter(iclevel %in% c("4-year", "2-year")) %>% 
-  filter(control == "Public") %>% 
-  mutate(type = paste(control, iclevel)) %>% 
-  mutate(year = mf_year %>% parse_number() %>% as.factor()) %>% 
-  group_by(type) %>% 
-  mutate_at(c("tuitionfee_in", "tuitionfee_out"),
-            ~statar::winsorise(., probs = c(0.02, 0.98), verbose = FALSE)) %>% 
-  ungroup() %>% 
-  gather(in_or_out, tuitionfee, tuitionfee_in:tuitionfee_out) %>% 
-  mutate(in_or_out = if_else(in_or_out == "tuitionfee_in",
-                              "In-state tuition and fees",
-                              "Out-of-state tuition and fees"))
-
-## Test the functional sequence
-scorecard::mf2014_15 %>% dplyr_seq()
-#> # A tibble: 3,600 x 7
-#>    mf_year iclevel control type        year  in_or_out           tuitionfee
-#>    <chr>   <fct>   <fct>   <chr>       <fct> <chr>                    <dbl>
-#>  1 2014-15 4-year  Public  Public 4-y… 2014  In-state tuition a…       9096
-#>  2 2014-15 4-year  Public  Public 4-y… 2014  In-state tuition a…       7510
-#>  3 2014-15 4-year  Public  Public 4-y… 2014  In-state tuition a…       9158
-#>  4 2014-15 4-year  Public  Public 4-y… 2014  In-state tuition a…       8720
-#>  5 2014-15 4-year  Public  Public 4-y… 2014  In-state tuition a…       9826
-#>  6 2014-15 2-year  Public  Public 2-y… 2014  In-state tuition a…       3491
-#>  7 2014-15 4-year  Public  Public 4-y… 2014  In-state tuition a…         NA
-#>  8 2014-15 4-year  Public  Public 4-y… 2014  In-state tuition a…       9080
-#>  9 2014-15 4-year  Public  Public 4-y… 2014  In-state tuition a…      10200
-#> 10 2014-15 2-year  Public  Public 2-y… 2014  In-state tuition a…       4320
-#> # … with 3,590 more rows
-
-bind_rows(
-  scorecard::mf2017_18 %>% dplyr_seq(),
-  scorecard::mf2016_17 %>% dplyr_seq(),
-  scorecard::mf2015_16 %>% dplyr_seq(),
-  scorecard::mf2014_15 %>% dplyr_seq(),
-  scorecard::mf2013_14 %>% dplyr_seq(),
-  scorecard::mf2012_13 %>% dplyr_seq(),
-  scorecard::mf2011_12 %>% dplyr_seq(),
-  scorecard::mf2010_11 %>% dplyr_seq(),
-  scorecard::mf2009_10 %>% dplyr_seq(),
-  scorecard::mf2008_09 %>% dplyr_seq(),
-  scorecard::mf2007_08 %>% dplyr_seq(),
-  scorecard::mf2006_07 %>% dplyr_seq(),
-  scorecard::mf2005_06 %>% dplyr_seq(),
-  scorecard::mf2004_05 %>% dplyr_seq(),
-  scorecard::mf2003_04 %>% dplyr_seq(),
-  scorecard::mf2002_03 %>% dplyr_seq(),
-  scorecard::mf2001_02 %>% dplyr_seq(),
-  scorecard::mf2000_01 %>% dplyr_seq()
-) -> df
-
-df %>% 
-  ggplot(aes(x = tuitionfee, y = year, fill = in_or_out)) +
-  ggjoy::geom_joy(scale = 2, alpha = .8, colour = "white") +
-  ggjoy::theme_joy() +
-  facet_wrap(~type, scales = "free") +
-  labs(x = NULL, y = NULL,
-       title = "In-State Vs. Out-of-State Tuition and Fees for Public Colleges",
-       caption = "Source: College Scorecard, 2000-2017") +
-  scale_x_continuous(labels = scales::dollar) +
-  scale_y_discrete(breaks = seq(2017, 2000, -3), 
-                   expand = c(0.01, 0)) +
-  theme(axis.text = element_text(size = 9),
-        legend.position = "top",
-        legend.title = element_blank(),
-        legend.justification = "center")
-```
-
 ![](README-files/in_or_out_tuition-1.png)<!-- -->
+
+## Distribution of Average Age of Entry
+
+![](README-files/age-of-entry-1.png)<!-- -->![](README-files/age-of-entry-2.png)<!-- -->

@@ -21,9 +21,9 @@ knitr::opts_chunk$set(
 [![Travis-CI Build Status](https://travis-ci.org/jjchern/scorecard.svg?branch=master)](https://travis-ci.org/jjchern/scorecard)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/jjchern/scorecard?branch=master&svg=true)](https://ci.appveyor.com/project/jjchern/scorecard)
 
-The `scorecard` package includes processed datasets from the [College Scorecard](https://collegescorecard.ed.gov), 1996-2015.
+The `scorecard` package includes processed datasets from the [College Scorecard](https://collegescorecard.ed.gov), 1996-2017.
 
-The Scorecard datasets are imbalance panels at the colleges-by-school-year level. The data was last updated in 2017. See the [changelog](https://collegescorecard.ed.gov/data/changelog/) for more details.
+The Scorecard datasets are imbalance panels at the colleges-by-school-year level. The data was last updated in 2019. See the [changelog](https://collegescorecard.ed.gov/data/changelog/) for more details.
 
 The following datasets are available:
 
@@ -68,7 +68,7 @@ You can also download the datasets as an R package. It might take a while to ins
 
 ```R
 # install.packages("devtools")
-devtools::install_github("jjchern/scorecard@v0.3.0")
+devtools::install_github("jjchern/scorecard@v0.4.0")
 
 # To uninstall the package, use:
 # remove.packages("scorecard")
@@ -136,7 +136,7 @@ show_val_label("distanceonly")
 <!-- labelled::val_labels(df) -->
 <!-- ``` -->
 
-## Exploring codebook and plot in-state tuition with a joyplot
+## Exploring codebook and plot distributions of in-state tuition
 
 ```{r in_tuition}
 vars = c("mf_year", "iclevel", "control", "tuitionfee_in")
@@ -196,7 +196,7 @@ df %>%
 
 ## Compareing in-state and out-of-state tuition and fees
 
-```{r in_or_out_tuition}
+```{r in_or_out_tuition, echo=FALSE}
 vars = c("mf_year", "iclevel", "control", "tuitionfee_in", "tuitionfee_out")
 
 dplyr_seq = . %>% 
@@ -216,7 +216,7 @@ dplyr_seq = . %>%
                               "Out-of-state tuition and fees"))
 
 ## Test the functional sequence
-scorecard::mf2014_15 %>% dplyr_seq()
+## scorecard::mf2014_15 %>% dplyr_seq()
 
 bind_rows(
   scorecard::mf2017_18 %>% dplyr_seq(),
@@ -255,3 +255,35 @@ df %>%
         legend.title = element_blank(),
         legend.justification = "center")
 ```
+
+## Distribution of Average Age of Entry
+
+```{r age-of-entry, echo=FALSE}
+scorecard::mf2016_17 %>%
+  select(instnm, control, iclevel, age_entry) %>%
+  haven::as_factor() %>%
+  filter(iclevel == "2-year") %>%
+  mutate(age_entry = as.numeric(age_entry)) %>%
+  ggplot(aes(x = age_entry)) +
+  geom_histogram(fill = "white", colour = "black") +
+  hrbrthemes::theme_ipsum_rc() +
+  labs(x = "Average Age of Entry", y = "Count",
+       title = "Distribution of Average Age of Entry",
+       subtitle = "for 2-Year Colleges",
+       caption = "Source: College Scorecard, 2016-17.")
+
+scorecard::mf2016_17 %>%
+  select(instnm, control, iclevel, age_entry) %>%
+  haven::as_factor() %>%
+  mutate(age_entry = as.numeric(age_entry)) %>%
+  ggplot(aes(x = age_entry)) +
+  # geom_freqpoly() +
+  geom_histogram(fill = "white", colour = "black") +
+  facet_grid(control ~ iclevel) +
+  hrbrthemes::theme_ipsum() +
+  labs(x = "Average Age of Entry", y = "Count",
+       title = "Distribution of Average Age of Entry",
+       subtitle = "by Control and Level of Institution",
+       caption = "Source: College Scorecard, 2016-17.")
+```
+
